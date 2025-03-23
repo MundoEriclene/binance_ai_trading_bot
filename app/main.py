@@ -1,11 +1,12 @@
 import threading
 import time
 import schedule
+import datetime
 from core.robo_v1_8 import executar_robo
 from core.notificacoes import enviar_telegram
+from core.relatorios import enviar_relatorio
 from dotenv import load_dotenv
 from fake_server import app
-from core.relatorios import enviar_relatorio
 
 load_dotenv(dotenv_path='config/.env')
 
@@ -22,10 +23,16 @@ def iniciar_robo():
         schedule.run_pending()
         time.sleep(5)
 
+# ✅ Verifica se é o 1º dia do mês
+def verificar_envio_mensal():
+    hoje = datetime.datetime.utcnow()
+    if hoje.day == 1:
+        enviar_relatorio("Mensal")
+
 # Agendar relatórios
 schedule.every().day.at("23:59").do(lambda: enviar_relatorio("Diário"))
 schedule.every().friday.at("23:59").do(lambda: enviar_relatorio("Semanal"))
-schedule.every().month.at("01:00").do(lambda: enviar_relatorio("Mensal"))
+schedule.every().day.at("01:00").do(verificar_envio_mensal)  # ⬅️ Corrigido
 
 if __name__ == "__main__":
     threading.Thread(target=iniciar_robo).start()
