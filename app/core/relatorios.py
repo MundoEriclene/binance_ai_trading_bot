@@ -6,17 +6,23 @@ from core.notificacoes import enviar_email
 CAMINHO_LOG = "core/logs/log_diario.json"
 
 def carregar_log():
+    """Carrega o log do dia salvo em JSON."""
     if not os.path.exists(CAMINHO_LOG):
         return []
-    with open(CAMINHO_LOG, "r") as f:
-        return json.load(f)
+    try:
+        with open(CAMINHO_LOG, "r") as f:
+            return json.load(f)
+    except Exception as e:
+        print(f"[ERRO] Falha ao carregar log: {e}")
+        return []
 
 def gerar_relatorio(tipo="Diário"):
+    """Gera um resumo textual do que aconteceu no período."""
     log = carregar_log()
     if not log:
         return "Nenhuma atividade registrada no período."
 
-    # Ordenar log por timestamp
+    # Ordena cronologicamente
     log.sort(key=lambda x: x.get("timestamp", ""))
 
     hoje = datetime.datetime.utcnow().date()
@@ -34,17 +40,17 @@ def gerar_relatorio(tipo="Diário"):
         except:
             data = raw_data
 
-        if item["tipo"] == "compra":
+        if item.get("tipo") == "compra":
             resumo += f"🟢 *Compra* — {data} a `{item['preco']:.2f}` USDT\n"
             total_compras += 1
 
-        elif item["tipo"] == "venda":
+        elif item.get("tipo") == "venda":
             resumo += f"🔴 *Venda* — {data} a `{item['preco']:.2f}` USDT | Lucro: `{item['lucro']:.2f}` USDT\n"
-            lucro_total += item['lucro']
+            lucro_total += item.get("lucro", 0)
             total_vendas += 1
 
-        elif item["tipo"] == "erro":
-            resumo += f"⚠️ *Erro* — {data}:\n> {item['mensagem']}\n"
+        elif item.get("tipo") == "erro":
+            resumo += f"⚠️ *Erro* — {data}:\n> {item.get('mensagem', 'Erro desconhecido')}\n"
             total_erros += 1
 
     resumo += "\n📌 *Resumo Final*\n"
@@ -58,6 +64,10 @@ def gerar_relatorio(tipo="Diário"):
     return resumo
 
 def enviar_relatorio(tipo="Diário"):
-    resumo = gerar_relatorio(tipo)
-    assunto = f"📬 Relatório {tipo} do RoboTrader"
-    enviar_email(assunto, resumo)
+    """Dispara o relatório via e-mail."""
+    try:
+        resumo = gerar_relatorio(tipo)
+        assunto = f"📬 Relatório {tipo} do RoboTrader"
+        enviar_email(assunto, resumo)
+    except Exception as e:
+        print(f"[ERRO] Falha ao enviar relatório: {e}")

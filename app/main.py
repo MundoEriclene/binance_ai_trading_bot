@@ -2,7 +2,6 @@ import threading
 import time
 import schedule
 from core.robo_v1_8 import executar_robo
-from core.relatorios import enviar_resumo
 from core.notificacoes import enviar_telegram
 from dotenv import load_dotenv
 from fake_server import app
