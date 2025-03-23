@@ -1,10 +1,9 @@
-import datetime
+import os
+import json
+from datetime import datetime
 from core.binance_api import get_price, buy_crypto, sell_crypto
 from core.utils import calcular_rsi, registrar_trade
 from core.notificacoes import enviar_telegram, reportar_erro
-import json
-import os
-from datetime import datetime
 
 def salvar_log(tipo, **kwargs):
     log_path = "core/logs/log_diario.json"

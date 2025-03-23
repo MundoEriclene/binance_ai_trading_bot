@@ -6,6 +6,9 @@ from binance.exceptions import BinanceAPIException
 API_KEY = os.getenv("BINANCE_API_KEY")
 API_SECRET = os.getenv("BINANCE_API_SECRET")
 
+if not API_KEY or not API_SECRET:
+    raise ValueError("⚠️ API_KEY ou API_SECRET não encontrados. Verifique seu .env ou variáveis do Render.")
+
 client = Client(API_KEY, API_SECRET)
 
 # === Função para pegar o preço ao vivo ===
@@ -27,6 +30,8 @@ def buy_crypto(symbol, quantity):
         print(f"🟢 Ordem de COMPRA executada: {order}")
     except BinanceAPIException as e:
         print(f"❌ Erro na compra: {e.message}")
+    except Exception as e:
+        print(f"❌ Erro inesperado na compra: {e}")
 
 # === Função para executar venda ===
 def sell_crypto(symbol, quantity):
@@ -38,3 +43,5 @@ def sell_crypto(symbol, quantity):
         print(f"🔴 Ordem de VENDA executada: {order}")
     except BinanceAPIException as e:
         print(f"❌ Erro na venda: {e.message}")
+    except Exception as e:
+        print(f"❌ Erro inesperado na venda: {e}")
