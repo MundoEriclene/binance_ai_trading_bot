@@ -6,6 +6,7 @@ from core.relatorios import enviar_resumo
 from core.notificacoes import enviar_telegram
 from dotenv import load_dotenv
 from fake_server import app
+from core.relatorios import enviar_relatorio
 
 load_dotenv(dotenv_path='config/.env')
 
@@ -23,9 +24,9 @@ def iniciar_robo():
         time.sleep(5)
 
 # Agendar relatórios
-schedule.every().day.at("23:59").do(lambda: enviar_resumo("diario"))
-schedule.every().monday.at("09:00").do(lambda: enviar_resumo("semanal"))
-schedule.every().day.at("00:05").do(lambda: enviar_resumo("mensal"))
+schedule.every().day.at("23:59").do(lambda: enviar_relatorio("Diário"))
+schedule.every().friday.at("23:59").do(lambda: enviar_relatorio("Semanal"))
+schedule.every().month.at("01:00").do(lambda: enviar_relatorio("Mensal"))
 
 if __name__ == "__main__":
     threading.Thread(target=iniciar_robo).start()

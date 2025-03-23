@@ -2,6 +2,23 @@ import datetime
 from core.binance_api import get_price, buy_crypto, sell_crypto
 from core.utils import calcular_rsi, registrar_trade
 from core.notificacoes import enviar_telegram, reportar_erro
+import json
+import os
+from datetime import datetime
+
+def salvar_log(tipo, **kwargs):
+    log_path = "core/logs/log_diario.json"
+    if not os.path.exists("core/logs"):
+        os.makedirs("core/logs")
+    log = []
+    if os.path.exists(log_path):
+        with open(log_path, "r") as f:
+            log = json.load(f)
+    registro = {"tipo": tipo, "timestamp": str(datetime.utcnow())}
+    registro.update(kwargs)
+    log.append(registro)
+    with open(log_path, "w") as f:
+        json.dump(log, f, indent=2)
 
 # === CONFIGURAÇÕES ===
 SYMBOL = "BTCUSDT"
@@ -20,9 +37,8 @@ def executar_robo():
         rsi = calcular_rsi(SYMBOL)
         if rsi and rsi < 35:
             score += 1
-        # (Outros critérios podem ser somados ao score aqui)
 
-        agora = datetime.datetime.utcnow()
+        agora = datetime.utcnow()
 
         # === COMPRA ===
         if not estado["em_posicao"] and score >= score_minimo:
@@ -33,6 +49,8 @@ def executar_robo():
             estado["btc_em_maos"] = quantidade_btc
             estado["data_entrada"] = agora
             registrar_trade("compra", preco, quantidade_btc)
+
+            salvar_log("compra", preco=preco)
 
             mensagem = f"""✅ *COMPRA REALIZADA*
 🕒 {agora}
@@ -52,6 +70,8 @@ def executar_robo():
                 sell_crypto(SYMBOL, estado["btc_em_maos"])
                 registrar_trade("venda", preco, estado["btc_em_maos"], lucro)
 
+                salvar_log("venda", preco=preco, lucro=lucro)
+
                 mensagem = f"""💸 *VENDA EXECUTADA*
 🕒 {agora}
 💰 Venda a: {preco:.2f}
@@ -70,4 +90,6 @@ def executar_robo():
             enviar_telegram(f"⏳ Aguardando oportunidade... SCORE atual: {score}/4")
 
     except Exception as e:
-        reportar_erro(str(e))
+        mensagem = str(e)
+        salvar_log("erro", mensagem=mensagem)
+        reportar_erro(mensagem)

@@ -1,50 +1,63 @@
-import pandas as pd
-from datetime import datetime, timedelta
-from core.notificacoes import enviar_telegram
+import os
+import json
+import datetime
+from core.notificacoes import enviar_email
 
-LOG_PATH = "logs/trades.log"
+CAMINHO_LOG = "core/logs/log_diario.json"
 
-def carregar_trades():
-    try:
-        colunas = ["timestamp", "tipo", "preco", "quantidade", "lucro"]
-        df = pd.read_csv(LOG_PATH, names=colunas)
-        df["timestamp"] = pd.to_datetime(df["timestamp"])
-        return df
-    except Exception as e:
-        print(f"Erro ao carregar log de trades: {e}")
-        return pd.DataFrame()
+def carregar_log():
+    if not os.path.exists(CAMINHO_LOG):
+        return []
+    with open(CAMINHO_LOG, "r") as f:
+        return json.load(f)
 
-def gerar_resumo(periodo="diario"):
-    df = carregar_trades()
-    if df.empty:
-        return "Nenhuma operação registrada ainda."
+def gerar_relatorio(tipo="Diário"):
+    log = carregar_log()
+    if not log:
+        return "Nenhuma atividade registrada no período."
 
-    agora = datetime.utcnow()
+    # Ordenar log por timestamp
+    log.sort(key=lambda x: x.get("timestamp", ""))
 
-    if periodo == "diario":
-        inicio = agora.replace(hour=0, minute=0, second=0)
-    elif periodo == "semanal":
-        inicio = agora - timedelta(days=7)
-    elif periodo == "mensal":
-        inicio = agora - timedelta(days=30)
-    else:
-        return "Período inválido."
+    hoje = datetime.datetime.utcnow().date()
+    resumo = f"🤖 *RoboTrader V1.8 – Relatório {tipo.upper()}*\n📅 {hoje.strftime('%d/%m/%Y')}\n\n"
 
-    df_periodo = df[df["timestamp"] >= inicio]
+    total_compras = 0
+    total_vendas = 0
+    total_erros = 0
+    lucro_total = 0.0
 
-    total_trades = len(df_periodo[df_periodo["tipo"] == "venda"])
-    lucro_total = df_periodo["lucro"].dropna().sum()
+    for item in log:
+        raw_data = item.get("timestamp", "desconhecido")
+        try:
+            data = datetime.datetime.fromisoformat(raw_data).strftime("%d/%m/%Y %H:%M")
+        except:
+            data = raw_data
 
-    resumo = f"""
-📊 *Resumo {periodo.capitalize()} do RoboTrader*
---------------------------
-🗓 Período: {inicio.date()} até {agora.date()}
-💼 Total de vendas: {total_trades}
-💰 Lucro acumulado: {lucro_total:.2f} USDT
-"""
+        if item["tipo"] == "compra":
+            resumo += f"🟢 *Compra* — {data} a `{item['preco']:.2f}` USDT\n"
+            total_compras += 1
+
+        elif item["tipo"] == "venda":
+            resumo += f"🔴 *Venda* — {data} a `{item['preco']:.2f}` USDT | Lucro: `{item['lucro']:.2f}` USDT\n"
+            lucro_total += item['lucro']
+            total_vendas += 1
+
+        elif item["tipo"] == "erro":
+            resumo += f"⚠️ *Erro* — {data}:\n> {item['mensagem']}\n"
+            total_erros += 1
+
+    resumo += "\n📌 *Resumo Final*\n"
+    resumo += f"- Compras realizadas: `{total_compras}`\n"
+    resumo += f"- Vendas executadas: `{total_vendas}`\n"
+    resumo += f"- Erros detectados: `{total_erros}`\n"
+    resumo += f"- Lucro total estimado: `{lucro_total:.2f}` USDT\n"
+
+    resumo += "\n✅ Robô ativo e rodando normalmente.\n🚀 Continue acompanhando no Telegram para alertas em tempo real."
 
     return resumo
 
-def enviar_resumo(periodo="diario"):
-    resumo = gerar_resumo(periodo)
-    enviar_telegram(resumo)
+def enviar_relatorio(tipo="Diário"):
+    resumo = gerar_relatorio(tipo)
+    assunto = f"📬 Relatório {tipo} do RoboTrader"
+    enviar_email(assunto, resumo)
