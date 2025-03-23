@@ -45,3 +45,6 @@ def enviar_telegram(mensagem):
                     print(f"Erro ao enviar para {chat_id}: {response.text}")
             except Exception as e:
                 print(f"Erro no Telegram ({chat_id}): {e}")
+def reportar_erro(msg):
+    enviar_telegram(f"❌ ERRO DETECTADO:\n{msg}")
+    enviar_email("❌ ERRO no RoboTrader", msg)
