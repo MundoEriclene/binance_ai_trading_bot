@@ -27,6 +27,7 @@ body {
     padding-left: 10px;
     animation: flicker 1s infinite alternate;
     overflow-wrap: break-word;
+    margin-bottom: 100px; /* Espaço extra para evitar colisão com os botões */
   }
   
   .typing-area::after {
@@ -49,11 +50,13 @@ body {
   .buttons-area {
     position: fixed;
     bottom: 80px;
-    left: 20px;
+    left: 50%;
+    transform: translateX(-50%);
     display: flex;
     flex-direction: column;
     gap: 12px;
     z-index: 999;
+    align-items: center;
   }
   
   .btn-contrato, .btn-manifesto {
@@ -92,9 +95,9 @@ body {
     position: fixed;
     bottom: 20px;
     right: 20px;
-    font-size: 18px;
+    font-size: 22px;
     color: #00ff00;
-    opacity: 0.15;
+    opacity: 0.3;
     cursor: pointer;
     z-index: 999;
     transition: opacity 0.3s ease, color 0.4s ease;
@@ -140,7 +143,7 @@ body {
   /* Responsividade Mobile */
   @media (max-width: 600px) {
     .terminal {
-      margin-top: 100px; /* Maior distância para evitar sobreposição */
+      margin-top: 100px;
     }
   
     .typing-area {
@@ -149,7 +152,6 @@ body {
     }
   
     .buttons-area {
-      left: 10px;
       bottom: 70px;
     }
   
@@ -159,9 +161,10 @@ body {
     }
   
     .ghost-key {
-      font-size: 16px;
+      font-size: 20px;
       bottom: 15px;
       right: 15px;
     }
   }
+  
   

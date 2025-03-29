@@ -96,7 +96,7 @@ window.addEventListener("click", () => {
 
 // Clique simples no 🔗 já leva ao Telegram
 ghostKey.addEventListener("click", () => {
-  window.open("https://t.me/seu_grupo_telegram", "_blank");
+  window.open("https://t.me/blacknode1970", "_blank");
 });
 
 // Rodapé dinâmico
