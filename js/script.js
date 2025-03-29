@@ -1,10 +1,24 @@
 const output = document.getElementById("output");
 const typingSound = document.getElementById("typingSound");
-const contadorEl = document.getElementById("contador");
-const ghostKey = document.getElementById("ghost-key");
 const rodape = document.getElementById("rodape-glitch");
 const manifestoLink = document.querySelector(".btn-manifesto");
 
+// Criar dinamicamente o contador
+const contadorEl = document.createElement("div");
+contadorEl.className = "contador-supply";
+contadorEl.id = "contador";
+document.body.appendChild(contadorEl);
+
+// Simulação de supply
+let supplyTotal = 1000000;
+let supplyVisivel = 998001;
+let contadorAtivo = false;
+
+// Telegram oculto por clique triplo
+const ghostKey = document.getElementById("ghost-key");
+let ghostClickCount = 0;
+
+// Frases da digitação
 const messages = [
   ">>> Acesso não autorizado... decodificando protocolo...",
   ">>> Ghost-1970 deixou um código. Eles tentaram deletar. Nós restauramos.",
@@ -20,17 +34,13 @@ let currentMessage = "";
 let typingInProgress = false;
 let typingFinalizado = false;
 
-// Supply real = 1.000.000 | Mas vamos simular escassez
-let supplyTotal = 1000000;
-let supplyVisivel = 998001; // Quase esgotado
-let contadorAtivo = false;
-
-// Ajusta link do manifesto conforme horário
+// Link do manifesto: dia/noite
 const hora = new Date().getHours();
 manifestoLink.href = hora >= 6 && hora < 18
   ? "assets/manifesto_dia.pdf"
   : "assets/manifesto_noite.pdf";
 
+// Efeito de digitação
 function typeNextCharacter() {
   if (messageIndex >= messages.length) {
     typingSound.loop = false;
@@ -54,16 +64,16 @@ function typeNextCharacter() {
   }
 }
 
-// Inicia contador de forma lenta e aleatória (parecendo real)
+// Atualiza contador de supply
 function atualizarContador() {
   if (supplyVisivel < supplyTotal) {
-    supplyVisivel += Math.floor(Math.random() * 2); // às vezes 0, 1, ou 1
+    supplyVisivel += Math.floor(Math.random() * 2);
     contadorEl.textContent = `Supply: ${supplyVisivel.toLocaleString()} / 1.000.000`;
     setTimeout(atualizarContador, 3000 + Math.random() * 2000);
   }
 }
 
-// Ação ao clicar (1x) — inicia digitação + som + contador
+// Início via clique
 window.addEventListener("click", () => {
   if (!typingInProgress && !typingFinalizado) {
     typingInProgress = true;
@@ -73,7 +83,6 @@ window.addEventListener("click", () => {
     typingSound.play().then(() => {
       typeNextCharacter();
     }).catch(err => {
-      console.error("Erro ao tocar som:", err);
       typeNextCharacter();
     });
   }
@@ -84,12 +93,16 @@ window.addEventListener("click", () => {
   }
 });
 
-// Telegram oculto (clicável)
+// Clique oculto no ícone 🔗 = ativa Telegram após 3 toques
 ghostKey.addEventListener("click", () => {
-  window.open("https://t.me/seu_grupo_telegram", "_blank");
+  ghostClickCount++;
+  if (ghostClickCount >= 3) {
+    window.open("https://t.me/seu_grupo_telegram", "_blank");
+    ghostClickCount = 0;
+  }
 });
 
-// Rodapé glitch dinâmico
+// Frases glitch do rodapé
 const frasesGlitch = [
   "Eles sabem que estamos aqui.",
   "Essa não é uma moeda. É uma falha.",

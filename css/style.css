@@ -9,14 +9,14 @@ body {
     position: relative;
   }
   
-  /* Centraliza o terminal */
+  /* Terminal centralizado */
   .terminal {
     min-height: 100vh;
     padding: 20px;
     box-sizing: border-box;
   }
   
-  /* Área de texto digitado */
+  /* Texto digitado */
   .typing-area {
     font-size: 1.2rem;
     line-height: 1.5;
@@ -26,6 +26,7 @@ body {
     border-left: 2px solid #00ff00;
     padding-left: 10px;
     animation: flicker 1s infinite alternate;
+    overflow-wrap: break-word;
   }
   
   /* Cursor piscando */
@@ -45,18 +46,7 @@ body {
     50% { opacity: 0; }
   }
   
-  /* Contador de supply */
-  .contador-supply {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    font-size: 0.95rem;
-    color: #00ff00;
-    font-family: monospace;
-    z-index: 999;
-  }
-  
-  /* Botões principais */
+  /* Botões */
   .buttons-area {
     position: fixed;
     bottom: 80px;
@@ -98,23 +88,25 @@ body {
     cursor: pointer;
   }
   
-  /* Telegram oculto */
+  /* Botão Telegram oculto */
   .ghost-key {
     position: fixed;
     bottom: 20px;
     right: 20px;
     font-size: 18px;
-    color: transparent;
+    color: #00ff00;
+    opacity: 0.05;
     cursor: pointer;
     z-index: 999;
-    transition: color 0.4s ease;
+    transition: opacity 0.3s ease, color 0.4s ease;
   }
   
   .ghost-key:hover {
+    opacity: 1;
     color: #00ff00;
   }
   
-  /* Rodapé com glitch */
+  /* Rodapé glitch */
   .glitch-rodape {
     position: fixed;
     bottom: 0;
@@ -133,5 +125,29 @@ body {
     0% { opacity: 0.8; }
     50% { opacity: 0.4; transform: translateX(-50%) scale(1.02); }
     100% { opacity: 0.8; }
+  }
+  
+  /* Responsividade para telas pequenas */
+  @media (max-width: 600px) {
+    .typing-area {
+      font-size: 1rem;
+      max-width: 95vw;
+    }
+  
+    .buttons-area {
+      left: 10px;
+      bottom: 70px;
+    }
+  
+    .btn-contrato, .btn-manifesto {
+      font-size: 0.8rem;
+      padding: 6px 10px;
+    }
+  
+    .ghost-key {
+      font-size: 16px;
+      bottom: 15px;
+      right: 15px;
+    }
   }
   
