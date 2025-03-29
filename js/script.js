@@ -1,5 +1,5 @@
 const output = document.getElementById("output");
-const typingSound = document.getElementById("typingSound"); // ativar se for usar áudio
+const typingSound = document.getElementById("typingSound");
 
 const messages = [
   ">>> Acesso não autorizado... decodificando protocolo...",
@@ -13,7 +13,6 @@ const messages = [
 let messageIndex = 0;
 let charIndex = 0;
 let currentMessage = "";
-let typing = true;
 
 function typeNextCharacter() {
   if (messageIndex >= messages.length) return;
@@ -23,23 +22,26 @@ function typeNextCharacter() {
   if (charIndex < currentMessage.length) {
     output.textContent += currentMessage.charAt(charIndex);
     charIndex++;
-
-    // typingSound.play(); // descomente se quiser som
-    setTimeout(typeNextCharacter, 40); // velocidade da digitação
+    setTimeout(typeNextCharacter, 40);
   } else {
     output.textContent += "\n\n";
     messageIndex++;
     charIndex = 0;
-    setTimeout(typeNextCharacter, 800); // tempo entre mensagens
+    setTimeout(typeNextCharacter, 800);
   }
 }
 
-// Iniciar efeito digitando após carregamento
-window.onload = () => {
-  typeNextCharacter();
-};
-// Desbloqueia o som após o primeiro clique
 window.addEventListener("click", () => {
-    typingSound.play();
+  // Iniciar som e digitação apenas depois do clique
+  typingSound.volume = 0.3; // ajusta o volume conforme necessário
+  typingSound.loop = true;
+  typingSound.play().then(() => {
+    // Quando som for liberado, iniciar digitação
+    typeNextCharacter();
+  }).catch(err => {
+    console.error("Erro ao reproduzir o som:", err);
+    typeNextCharacter(); // continua mesmo sem som
   });
+});
+
   
