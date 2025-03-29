@@ -49,3 +49,89 @@ body {
     50% { opacity: 0; }
   }
   
+  /* Área dos botões fixada no canto inferior esquerdo */
+  .buttons-area {
+    position: absolute;
+    bottom: 40px;
+    left: 40px;
+  }
+  
+  /* Botão do contrato */
+  .btn-contrato {
+    color: #00ff00;
+    background: transparent;
+    border: 1px dashed #00ff00;
+    padding: 8px 12px;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: all 0.2s ease-in-out;
+  }
+  
+  .btn-contrato:hover {
+    background-color: #00ff00;
+    color: #000;
+    cursor: pointer;
+  }
+  
+  /* Botão do manifesto */
+  .btn-manifesto {
+    display: block;
+    margin-top: 12px;
+    color: #ff0040;
+    border: 1px dashed #ff0040;
+    padding: 8px 12px;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: all 0.2s ease-in-out;
+  }
+  
+  .btn-manifesto:hover {
+    background-color: #ff0040;
+    color: #000;
+    cursor: pointer;
+  }
+  
+  /* Contador no topo direito */
+  .contador-supply {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    font-size: 1rem;
+    color: #00ff00;
+    font-family: monospace;
+  }
+  
+  /* Entrada oculta (Telegram) */
+  .ghost-key {
+    position: absolute;
+    bottom: 10px;
+    right: 30px;
+    font-size: 14px;
+    color: #0a0a0a; /* levemente visível, mas ainda escondido */
+    cursor: pointer;
+  }
+  
+  .ghost-key:hover {
+    color: #00ff00;
+  }
+  
+  /* Rodapé com glitch visual */
+  .glitch-rodape {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 14px;
+    color: #00ff00;
+    opacity: 0.8;
+    animation: glitchText 4s infinite;
+    font-family: monospace;
+    pointer-events: none;
+  }
+  
+  @keyframes glitchText {
+    0% { opacity: 0.8; }
+    50% { opacity: 0.4; transform: translateX(-50%) scale(1.02); }
+    100% { opacity: 0.8; }
+  }
+  

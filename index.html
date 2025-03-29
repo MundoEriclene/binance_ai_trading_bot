@@ -7,14 +7,34 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+
+  <!-- Terminal principal -->
   <div class="terminal">
     <pre id="output" class="typing-area">_</pre>
   </div>
 
- <!-- Áudio de digitação (ativo) -->
- <audio id="typingSound" src="assets/audio.mp3" preload="auto"></audio>
+  <!-- HUD / Camadas visuais -->
+  <div class="buttons-area">
+    <a href="https://etherscan.io/address/0x91EXEMPLO" target="_blank" class="btn-contrato">
+      [ Visualizar Contrato 0x91... ]
+    </a>
+    <a href="assets/manifesto.pdf" target="_blank" class="btn-manifesto">
+      [ Decodificar o Manifesto ]
+    </a>
+  </div>
 
+  <div class="contador-supply" id="contador">
+    Supply: 4.819 / 10.000
+  </div>
 
+  <span id="ghost-key" class="ghost-key">. . .</span>
+
+  <div id="rodape-glitch" class="glitch-rodape">“Essa não é uma moeda. É uma falha.”</div>
+
+  <!-- Áudio de digitação -->
+  <audio id="typingSound" src="assets/audio.mp3" preload="auto"></audio>
+
+  <!-- Script -->
   <script src="js/script.js"></script>
 </body>
 </html>
