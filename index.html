@@ -8,12 +8,17 @@
 </head>
 <body>
 
-  <!-- Terminal principal -->
+  <!-- Terminal -->
   <div class="terminal">
     <pre id="output" class="typing-area">_</pre>
   </div>
 
-  <!-- HUD / Camadas visuais -->
+  <!-- Supply dinâmico (contador) -->
+  <div class="contador-supply" id="contador">
+    Supply: 4.819 / 10.000
+  </div>
+
+  <!-- Botões -->
   <div class="buttons-area">
     <a href="https://etherscan.io/address/0x91EXEMPLO" target="_blank" class="btn-contrato">
       [ Visualizar Contrato 0x91... ]
@@ -23,18 +28,16 @@
     </a>
   </div>
 
-  <div class="contador-supply" id="contador">
-    Supply: 4.819 / 10.000
-  </div>
-
+  <!-- Entrada oculta para Telegram -->
   <span id="ghost-key" class="ghost-key">. . .</span>
 
+  <!-- Rodapé com frases glitch -->
   <div id="rodape-glitch" class="glitch-rodape">“Essa não é uma moeda. É uma falha.”</div>
 
-  <!-- Áudio de digitação -->
+  <!-- Som de digitação -->
   <audio id="typingSound" src="assets/audio.mp3" preload="auto"></audio>
 
-  <!-- Script -->
+  <!-- Script principal -->
   <script src="js/script.js"></script>
 </body>
 </html>

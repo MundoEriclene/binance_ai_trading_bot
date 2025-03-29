@@ -6,16 +6,18 @@ body {
     margin: 0;
     padding: 0;
     overflow: hidden;
+    position: relative;
   }
   
   /* Centraliza o terminal na tela */
   .terminal {
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 20px;
     box-sizing: border-box;
+    z-index: 1;
   }
   
   /* Área onde o texto vai aparecer */
@@ -49,11 +51,12 @@ body {
     50% { opacity: 0; }
   }
   
-  /* Área dos botões fixada no canto inferior esquerdo */
+  /* Área dos botões */
   .buttons-area {
     position: absolute;
     bottom: 40px;
     left: 40px;
+    z-index: 10;
   }
   
   /* Botão do contrato */
@@ -99,6 +102,7 @@ body {
     font-size: 1rem;
     color: #00ff00;
     font-family: monospace;
+    z-index: 10;
   }
   
   /* Entrada oculta (Telegram) */
@@ -107,8 +111,9 @@ body {
     bottom: 10px;
     right: 30px;
     font-size: 14px;
-    color: #0a0a0a; /* levemente visível, mas ainda escondido */
+    color: #0a0a0a;
     cursor: pointer;
+    z-index: 10;
   }
   
   .ghost-key:hover {
@@ -127,6 +132,7 @@ body {
     animation: glitchText 4s infinite;
     font-family: monospace;
     pointer-events: none;
+    z-index: 5;
   }
   
   @keyframes glitchText {
