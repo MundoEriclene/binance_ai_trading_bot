@@ -14,12 +14,15 @@ let messageIndex = 0;
 let charIndex = 0;
 let currentMessage = "";
 let typingInProgress = false;
+let typingFinalizado = false;
 
 function typeNextCharacter() {
   if (messageIndex >= messages.length) {
-    // Todas as mensagens foram digitadas — parar som
+    // ✅ TUDO TERMINOU AQUI
+    typingSound.loop = false;
     typingSound.pause();
     typingSound.currentTime = 0;
+    typingFinalizado = true;
     return;
   }
 
@@ -37,9 +40,9 @@ function typeNextCharacter() {
   }
 }
 
-// Iniciar digitação e som após clique
+// 🎯 Garante que o som e digitação só iniciam uma vez
 window.addEventListener("click", () => {
-  if (typingInProgress) return; // Evita iniciar duas vezes
+  if (typingInProgress || typingFinalizado) return;
 
   typingInProgress = true;
   typingSound.volume = 0.3;
