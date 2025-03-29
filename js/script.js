@@ -4,12 +4,10 @@ const rodape = document.getElementById("rodape-glitch");
 const manifestoLink = document.querySelector(".btn-manifesto");
 const ghostKey = document.getElementById("ghost-key");
 
-// Simulação de supply
+// Simulação de supply escasso
 let supplyTotal = 1000000;
-let supplyVisivel = 998001;
+let supplyVisivel = 999001; // Ainda mais próximo do total
 let contadorAtivo = false;
-
-// Criar dinamicamente o contador após digitação
 let contadorEl = null;
 
 // Frases da digitação
@@ -28,13 +26,13 @@ let currentMessage = "";
 let typingInProgress = false;
 let typingFinalizado = false;
 
-// Link do manifesto: dia/noite
+// Link do manifesto (baseado no horário do sistema)
 const hora = new Date().getHours();
 manifestoLink.href = hora >= 6 && hora < 18
   ? "assets/manifesto_dia.pdf"
   : "assets/manifesto_noite.pdf";
 
-// Efeito de digitação
+// Digitação dos textos
 function typeNextCharacter() {
   if (messageIndex >= messages.length) {
     typingSound.loop = false;
@@ -65,16 +63,24 @@ function typeNextCharacter() {
   }
 }
 
-// Atualiza contador lentamente após digitação
+// Atualiza contador de forma realista
 function atualizarContador() {
+  if (!contadorEl) return;
+
   if (supplyVisivel < supplyTotal) {
-    supplyVisivel += Math.floor(Math.random() * 2);
+    const incremento = Math.random() < 0.9 ? 1 : 0; // 90% chance de subir 1, 10% de nada
+    supplyVisivel += incremento;
+
     contadorEl.textContent = `Supply: ${supplyVisivel.toLocaleString()} / 1.000.000`;
-    setTimeout(atualizarContador, 3000 + Math.random() * 2000);
+
+    // Diminui a velocidade conforme se aproxima do total
+    const distancia = supplyTotal - supplyVisivel;
+    const delay = Math.min(4000, 1000 + Math.random() * (distancia / 2));
+    setTimeout(atualizarContador, delay);
   }
 }
 
-// Início via clique
+// Inicia tudo ao clicar
 window.addEventListener("click", () => {
   if (!typingInProgress && !typingFinalizado) {
     typingInProgress = true;
@@ -83,7 +89,7 @@ window.addEventListener("click", () => {
 
     typingSound.play().then(() => {
       typeNextCharacter();
-    }).catch(err => {
+    }).catch(() => {
       typeNextCharacter();
     });
   }
@@ -94,12 +100,12 @@ window.addEventListener("click", () => {
   }
 });
 
-// Clique simples no 🔗 já leva ao Telegram
+// Telegram visível
 ghostKey.addEventListener("click", () => {
   window.open("https://t.me/blacknode1970", "_blank");
 });
 
-// Rodapé dinâmico
+// Rodapé com frases glitch
 const frasesGlitch = [
   "Eles sabem que estamos aqui.",
   "Essa não é uma moeda. É uma falha.",
@@ -113,5 +119,3 @@ setInterval(() => {
   rodape.textContent = frasesGlitch[i];
   i = (i + 1) % frasesGlitch.length;
 }, 6000);
-
-
