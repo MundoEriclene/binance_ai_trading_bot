@@ -19,15 +19,17 @@ let charIndex = 0;
 let currentMessage = "";
 let typingInProgress = false;
 let typingFinalizado = false;
-let supplyAtual = 4819;
 
-// Atualiza o link do manifesto conforme o horário
+// Supply real = 1.000.000 | Mas vamos simular escassez
+let supplyTotal = 1000000;
+let supplyVisivel = 998001; // Quase esgotado
+let contadorAtivo = false;
+
+// Ajusta link do manifesto conforme horário
 const hora = new Date().getHours();
-if (hora >= 6 && hora < 18) {
-  manifestoLink.href = "assets/manifesto_dia.pdf";
-} else {
-  manifestoLink.href = "assets/manifesto_noite.pdf";
-}
+manifestoLink.href = hora >= 6 && hora < 18
+  ? "assets/manifesto_dia.pdf"
+  : "assets/manifesto_noite.pdf";
 
 function typeNextCharacter() {
   if (messageIndex >= messages.length) {
@@ -52,14 +54,16 @@ function typeNextCharacter() {
   }
 }
 
+// Inicia contador de forma lenta e aleatória (parecendo real)
 function atualizarContador() {
-  if (supplyAtual < 10000) {
-    supplyAtual += Math.floor(Math.random() * 2);
-    contadorEl.textContent = `Supply: ${supplyAtual} / 10.000`;
-    setTimeout(atualizarContador, 1500 + Math.random() * 1500);
+  if (supplyVisivel < supplyTotal) {
+    supplyVisivel += Math.floor(Math.random() * 2); // às vezes 0, 1, ou 1
+    contadorEl.textContent = `Supply: ${supplyVisivel.toLocaleString()} / 1.000.000`;
+    setTimeout(atualizarContador, 3000 + Math.random() * 2000);
   }
 }
 
+// Ação ao clicar (1x) — inicia digitação + som + contador
 window.addEventListener("click", () => {
   if (!typingInProgress && !typingFinalizado) {
     typingInProgress = true;
@@ -74,15 +78,18 @@ window.addEventListener("click", () => {
     });
   }
 
-  if (typingFinalizado) {
+  if (typingFinalizado && !contadorAtivo) {
+    contadorAtivo = true;
     atualizarContador();
   }
 });
 
+// Telegram oculto (clicável)
 ghostKey.addEventListener("click", () => {
   window.open("https://t.me/seu_grupo_telegram", "_blank");
 });
 
+// Rodapé glitch dinâmico
 const frasesGlitch = [
   "Eles sabem que estamos aqui.",
   "Essa não é uma moeda. É uma falha.",
@@ -96,3 +103,4 @@ setInterval(() => {
   rodape.textContent = frasesGlitch[i];
   i = (i + 1) % frasesGlitch.length;
 }, 6000);
+
