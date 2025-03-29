@@ -1,0 +1,51 @@
+/* Fundo escuro total estilo terminal */
+body {
+    background-color: #000;
+    color: #00ff00;
+    font-family: 'Courier New', Courier, monospace;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+  
+  /* Centraliza o terminal na tela */
+  .terminal {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  
+  /* Área onde o texto vai aparecer */
+  .typing-area {
+    font-size: 1.2rem;
+    line-height: 1.5;
+    white-space: pre-wrap;
+    word-break: break-word;
+    max-width: 90vw;
+    border-left: 2px solid #00ff00;
+    padding-left: 10px;
+    animation: flicker 1s infinite alternate;
+  }
+  
+  /* Animação do cursor piscando */
+  .typing-area::after {
+    content: "_";
+    animation: blink 0.8s steps(1) infinite;
+  }
+  
+  /* Animação de flicker verde estilo monitor */
+  @keyframes flicker {
+    0% { opacity: 0.95; }
+    50% { opacity: 1; }
+    100% { opacity: 0.92; }
+  }
+  
+  /* Cursor piscando estilo terminal */
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+  
