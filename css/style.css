@@ -87,14 +87,14 @@ body {
     cursor: pointer;
   }
   
-  /* Botão Telegram agora visível sutilmente */
+  /* Telegram visível */
   .ghost-key {
     position: fixed;
     bottom: 20px;
     right: 20px;
     font-size: 18px;
     color: #00ff00;
-    opacity: 0.1;
+    opacity: 0.15;
     cursor: pointer;
     z-index: 999;
     transition: opacity 0.3s ease, color 0.4s ease;
@@ -117,7 +117,7 @@ body {
     animation: glitchText 4s infinite;
     font-family: monospace;
     pointer-events: none;
-    z-index: 900;
+    z-index: 800;
   }
   
   @keyframes glitchText {
@@ -126,10 +126,21 @@ body {
     100% { opacity: 0.8; }
   }
   
-  /* Correção no mobile para evitar sobreposição */
+  /* Contador */
+  .contador-supply {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    font-size: 0.95rem;
+    color: #00ff00;
+    font-family: monospace;
+    z-index: 1000;
+  }
+  
+  /* Responsividade Mobile */
   @media (max-width: 600px) {
     .terminal {
-      margin-top: 60px;
+      margin-top: 100px; /* Maior distância para evitar sobreposição */
     }
   
     .typing-area {
