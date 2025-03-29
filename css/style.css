@@ -1,18 +1,35 @@
-/* Fundo escuro estilo terminal */
+/* Layout geral */
 body {
     background-color: #000;
     color: #00ff00;
     font-family: 'Courier New', Courier, monospace;
     margin: 0;
     padding: 0;
-    overflow-y: auto;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
     position: relative;
   }
   
-  /* Terminal */
+  /* Supply fixo no topo */
+  .contador-supply {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 0.95rem;
+    color: #00ff00;
+    font-family: monospace;
+    z-index: 1000;
+  }
+  
+  /* Terminal ocupa o meio */
   .terminal {
-    min-height: 100vh;
-    padding: 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 40px 20px;
     box-sizing: border-box;
   }
   
@@ -27,7 +44,7 @@ body {
     padding-left: 10px;
     animation: flicker 1s infinite alternate;
     overflow-wrap: break-word;
-    margin-bottom: 100px; /* Espaço extra para evitar colisão com os botões */
+    margin-bottom: 30px;
   }
   
   .typing-area::after {
@@ -35,28 +52,24 @@ body {
     animation: blink 0.8s steps(1) infinite;
   }
   
+  /* Cursor */
   @keyframes flicker {
     0% { opacity: 0.95; }
     50% { opacity: 1; }
     100% { opacity: 0.92; }
   }
-  
   @keyframes blink {
     0%, 100% { opacity: 1; }
     50% { opacity: 0; }
   }
   
-  /* Botões */
+  /* Botões centralizados */
   .buttons-area {
-    position: fixed;
-    bottom: 80px;
-    left: 50%;
-    transform: translateX(-50%);
     display: flex;
     flex-direction: column;
     gap: 12px;
-    z-index: 999;
     align-items: center;
+    margin-bottom: 60px;
   }
   
   .btn-contrato, .btn-manifesto {
@@ -72,27 +85,23 @@ body {
     color: #00ff00;
     border-color: #00ff00;
   }
-  
   .btn-contrato:hover {
     background-color: #00ff00;
     color: #000;
-    cursor: pointer;
   }
   
   .btn-manifesto {
     color: #ff0040;
     border-color: #ff0040;
   }
-  
   .btn-manifesto:hover {
     background-color: #ff0040;
     color: #000;
-    cursor: pointer;
   }
   
-  /* Telegram visível */
+  /* Telegram ícone */
   .ghost-key {
-    position: fixed;
+    position: absolute;
     bottom: 20px;
     right: 20px;
     font-size: 22px;
@@ -102,15 +111,14 @@ body {
     z-index: 999;
     transition: opacity 0.3s ease, color 0.4s ease;
   }
-  
   .ghost-key:hover {
     opacity: 1;
     color: #00ff00;
   }
   
-  /* Rodapé glitch */
+  /* Rodapé glitch fixo */
   .glitch-rodape {
-    position: fixed;
+    position: absolute;
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
@@ -129,30 +137,11 @@ body {
     100% { opacity: 0.8; }
   }
   
-  /* Contador */
-  .contador-supply {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    font-size: 0.95rem;
-    color: #00ff00;
-    font-family: monospace;
-    z-index: 1000;
-  }
-  
-  /* Responsividade Mobile */
+  /* Responsivo */
   @media (max-width: 600px) {
-    .terminal {
-      margin-top: 100px;
-    }
-  
     .typing-area {
       font-size: 1rem;
       max-width: 95vw;
-    }
-  
-    .buttons-area {
-      bottom: 70px;
     }
   
     .btn-contrato, .btn-manifesto {
@@ -166,5 +155,4 @@ body {
       right: 15px;
     }
   }
-  
   
