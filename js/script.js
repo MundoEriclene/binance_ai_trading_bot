@@ -119,3 +119,7 @@ setInterval(() => {
   rodape.textContent = frasesGlitch[i];
   i = (i + 1) % frasesGlitch.length;
 }, 6000);
+document.getElementById("roadmap-key").addEventListener("click", () => {
+    window.open("assets/roadmap_blacknode.pdf", "_blank");
+  });
+  
