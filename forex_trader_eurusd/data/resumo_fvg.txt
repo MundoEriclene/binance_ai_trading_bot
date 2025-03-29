@@ -1,0 +1,17 @@
+📊 RELATÓRIO FINAL - FVG + Candle Reversão + Market Profile
+
+Saldo Inicial:          $ 10,000.00
+Saldo Final:            $ 9,474.30
+Lucro Total:            $ -525.70
+Retorno Total:          -5.26%
+Lucro Máximo Diário:    $ 383.60
+Perda Máxima Diária:    $ -487.00
+Drawdown Máximo:        $ 981.50
+Taxa de Acerto:         25.00%
+Total de Trades:        8
+Trades com Lucro:       2
+Trades com Prejuízo:    6
+
+📄 CSV salvo em:         /Users/programacao/Documents/binance_ai_trading_bot/forex_trader_eurusd/data/resultados_fvg.csv
+🖼️ Gráfico salvo em:     /Users/programacao/Documents/binance_ai_trading_bot/forex_trader_eurusd/data/equity_curve_fvg.png
+📝 Resumo salvo em:      /Users/programacao/Documents/binance_ai_trading_bot/forex_trader_eurusd/data/resumo_fvg.txt
