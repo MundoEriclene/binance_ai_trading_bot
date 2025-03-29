@@ -7,7 +7,7 @@ const manifestoLink = document.querySelector(".btn-manifesto");
 
 const messages = [
   ">>> Acesso não autorizado... decodificando protocolo...",
-  ">>> Ghost-91 deixou um código. Eles tentaram deletar. Nós restauramos.",
+  ">>> Ghost-1970 deixou um código. Eles tentaram deletar. Nós restauramos.",
   ">>> Fragmento recuperado: [0x91-cdn://manifesto]",
   ">>> O manifesto está corrompido... tentando decodificar.",
   ">>> ALERTA: rastreamento detectado.",
