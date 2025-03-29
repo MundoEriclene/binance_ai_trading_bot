@@ -5,7 +5,7 @@ body {
     font-family: 'Courier New', Courier, monospace;
     margin: 0;
     padding: 0;
-    height: 100vh;
+    height: 100dvh; /* dynamic viewport - mais preciso no mobile */
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -23,12 +23,10 @@ body {
     z-index: 1000;
   }
   
-  /* Terminal ocupa o meio */
+  /* Terminal ocupa o meio com scroll interno */
   .terminal {
     flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    overflow-y: auto;
     padding: 40px 20px;
     box-sizing: border-box;
   }
@@ -99,17 +97,18 @@ body {
     color: #000;
   }
   
-  /* Telegram ícone */
+  /* Telegram ícone sempre visível */
   .ghost-key {
     position: absolute;
     bottom: 20px;
     right: 20px;
     font-size: 22px;
     color: #00ff00;
-    opacity: 0.3;
+    opacity: 0.5;
     cursor: pointer;
     z-index: 999;
     transition: opacity 0.3s ease, color 0.4s ease;
+    text-shadow: 0 0 6px #00ff00;
   }
   .ghost-key:hover {
     opacity: 1;
