@@ -2,21 +2,15 @@ const output = document.getElementById("output");
 const typingSound = document.getElementById("typingSound");
 const rodape = document.getElementById("rodape-glitch");
 const manifestoLink = document.querySelector(".btn-manifesto");
-
-// Criar dinamicamente o contador
-const contadorEl = document.createElement("div");
-contadorEl.className = "contador-supply";
-contadorEl.id = "contador";
-document.body.appendChild(contadorEl);
+const ghostKey = document.getElementById("ghost-key");
 
 // Simulação de supply
 let supplyTotal = 1000000;
 let supplyVisivel = 998001;
 let contadorAtivo = false;
 
-// Telegram oculto por clique triplo
-const ghostKey = document.getElementById("ghost-key");
-let ghostClickCount = 0;
+// Criar dinamicamente o contador após digitação
+let contadorEl = null;
 
 // Frases da digitação
 const messages = [
@@ -47,6 +41,13 @@ function typeNextCharacter() {
     typingSound.pause();
     typingSound.currentTime = 0;
     typingFinalizado = true;
+
+    // Cria contador após finalização
+    contadorEl = document.createElement("div");
+    contadorEl.className = "contador-supply";
+    contadorEl.id = "contador";
+    contadorEl.textContent = `Supply: ${supplyVisivel.toLocaleString()} / 1.000.000`;
+    document.body.appendChild(contadorEl);
     return;
   }
 
@@ -64,7 +65,7 @@ function typeNextCharacter() {
   }
 }
 
-// Atualiza contador de supply
+// Atualiza contador lentamente após digitação
 function atualizarContador() {
   if (supplyVisivel < supplyTotal) {
     supplyVisivel += Math.floor(Math.random() * 2);
@@ -93,16 +94,12 @@ window.addEventListener("click", () => {
   }
 });
 
-// Clique oculto no ícone 🔗 = ativa Telegram após 3 toques
+// Clique simples no 🔗 já leva ao Telegram
 ghostKey.addEventListener("click", () => {
-  ghostClickCount++;
-  if (ghostClickCount >= 3) {
-    window.open("https://t.me/seu_grupo_telegram", "_blank");
-    ghostClickCount = 0;
-  }
+  window.open("https://t.me/seu_grupo_telegram", "_blank");
 });
 
-// Frases glitch do rodapé
+// Rodapé dinâmico
 const frasesGlitch = [
   "Eles sabem que estamos aqui.",
   "Essa não é uma moeda. É uma falha.",
@@ -116,4 +113,5 @@ setInterval(() => {
   rodape.textContent = frasesGlitch[i];
   i = (i + 1) % frasesGlitch.length;
 }, 6000);
+
 

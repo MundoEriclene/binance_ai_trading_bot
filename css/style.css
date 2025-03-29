@@ -1,4 +1,4 @@
-/* Fundo escuro total estilo terminal */
+/* Fundo escuro estilo terminal */
 body {
     background-color: #000;
     color: #00ff00;
@@ -9,7 +9,7 @@ body {
     position: relative;
   }
   
-  /* Terminal centralizado */
+  /* Terminal */
   .terminal {
     min-height: 100vh;
     padding: 20px;
@@ -29,7 +29,6 @@ body {
     overflow-wrap: break-word;
   }
   
-  /* Cursor piscando */
   .typing-area::after {
     content: "_";
     animation: blink 0.8s steps(1) infinite;
@@ -88,14 +87,14 @@ body {
     cursor: pointer;
   }
   
-  /* Botão Telegram oculto */
+  /* Botão Telegram agora visível sutilmente */
   .ghost-key {
     position: fixed;
     bottom: 20px;
     right: 20px;
     font-size: 18px;
     color: #00ff00;
-    opacity: 0.05;
+    opacity: 0.1;
     cursor: pointer;
     z-index: 999;
     transition: opacity 0.3s ease, color 0.4s ease;
@@ -127,8 +126,12 @@ body {
     100% { opacity: 0.8; }
   }
   
-  /* Responsividade para telas pequenas */
+  /* Correção no mobile para evitar sobreposição */
   @media (max-width: 600px) {
+    .terminal {
+      margin-top: 60px;
+    }
+  
     .typing-area {
       font-size: 1rem;
       max-width: 95vw;
