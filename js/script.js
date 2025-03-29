@@ -38,3 +38,8 @@ function typeNextCharacter() {
 window.onload = () => {
   typeNextCharacter();
 };
+// Desbloqueia o som após o primeiro clique
+window.addEventListener("click", () => {
+    typingSound.play();
+  });
+  
