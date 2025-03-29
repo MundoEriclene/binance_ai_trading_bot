@@ -13,9 +13,15 @@ const messages = [
 let messageIndex = 0;
 let charIndex = 0;
 let currentMessage = "";
+let typingInProgress = false;
 
 function typeNextCharacter() {
-  if (messageIndex >= messages.length) return;
+  if (messageIndex >= messages.length) {
+    // Todas as mensagens foram digitadas — parar som
+    typingSound.pause();
+    typingSound.currentTime = 0;
+    return;
+  }
 
   currentMessage = messages[messageIndex];
 
@@ -31,17 +37,18 @@ function typeNextCharacter() {
   }
 }
 
+// Iniciar digitação e som após clique
 window.addEventListener("click", () => {
-  // Iniciar som e digitação apenas depois do clique
-  typingSound.volume = 0.3; // ajusta o volume conforme necessário
+  if (typingInProgress) return; // Evita iniciar duas vezes
+
+  typingInProgress = true;
+  typingSound.volume = 0.3;
   typingSound.loop = true;
+
   typingSound.play().then(() => {
-    // Quando som for liberado, iniciar digitação
     typeNextCharacter();
   }).catch(err => {
-    console.error("Erro ao reproduzir o som:", err);
-    typeNextCharacter(); // continua mesmo sem som
+    console.error("Erro ao tocar som:", err);
+    typeNextCharacter();
   });
 });
-
-  
