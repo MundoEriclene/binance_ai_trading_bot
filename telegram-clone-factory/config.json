@@ -1,8 +1,0 @@
-{
-    "proxy_list": [
-      "proxy1:port",
-      "proxy2:port",
-      "proxy3:port"
-    ]
-  }
-  

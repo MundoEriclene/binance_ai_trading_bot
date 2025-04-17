@@ -1,0 +1,3 @@
+http://user:pass@ip:port
+http://ghostvpn:1234@190.92.142.36:8080
+http://br-clone01:senha321@91.109.113.42:3128
