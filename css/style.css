@@ -1,3 +1,4 @@
+
 /* Layout geral */
 body {
   background-color: #000;
@@ -56,20 +57,23 @@ body {
 
 /* Botão sinistro (Novo botão) */
 .btn-sinistro {
-  color: #ff00ff; /* Cor mística */
-  border-color: #ff00ff; /* Cor de destaque */
+  color: #ff0000; /* Cor vermelha (sangue) */
+  border-color: #ff0000; /* Borda vermelha */
   font-size: 1.1rem; /* Levemente maior */
   padding: 10px 14px; /* Ajuste no padding */
-  border-radius: 8px; /* Arredondando bordas para um efeito mais misterioso */
-  animation: glitch 2s infinite;
+  border-radius: 8px; /* Bordas arredondadas */
+  animation: glitch 2s infinite, bloodEffect 1.5s infinite; /* Efeito glitch e sangue */
   display: none; /* Inicialmente invisível */
   text-decoration: none; /* Remove underline */
   text-align: center;
+  font-family: 'Courier New', Courier, monospace;
 }
 
 .btn-sinistro:hover {
-  background-color: #ff00ff;
+  background-color: #ff0000;
   color: #000;
+  text-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000;
+  box-shadow: 0 0 30px #ff0000, 0 0 60px #ff0000;
 }
 
 /* Animação glitch para o botão sinistro */
@@ -79,6 +83,13 @@ body {
   50% { transform: translateX(1px) translateY(1px); }
   75% { transform: translateX(-1px) translateY(-1px); }
   100% { transform: translateX(1px) translateY(1px); }
+}
+
+/* Efeito sangue no botão */
+@keyframes bloodEffect {
+  0% { color: #ff0000; }
+  50% { color: #8b0000; /* Cor mais escura, como sangue coagulado */ }
+  100% { color: #ff0000; }
 }
 
 /* Telegram ícone sempre visível */

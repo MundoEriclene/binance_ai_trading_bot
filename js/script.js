@@ -95,5 +95,5 @@ document.getElementById("roadmap-key").addEventListener("click", () => {
 // Novo botão sinistro para abrir página bizarra
 const btnSinistro = document.querySelector(".btn-sinistro");
 btnSinistro.addEventListener("click", () => {
-  window.open("bizarro.html", "_blank"); // Abre a nova página bizarra
+  window.open("livro_perdido_vaticano.html", "_blank"); // Abre a nova página "O Livro Perdido do Vaticano"
 });
