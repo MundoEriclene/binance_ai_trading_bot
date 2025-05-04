@@ -34,8 +34,17 @@ function typeNextCharacter() {
     typingSound.currentTime = 0;
     typingFinalizado = true;
 
-    // Substituir o Supply pelo botão sinistro
-    document.querySelector(".btn-sinistro").style.display = 'block'; // Exibe o botão após a digitação
+    // Exibe os botões após a digitação com efeito suave
+    document.querySelector(".btn-sinistro").style.display = 'block'; // Exibe o botão "Revelar o Livro Perdido do Vaticano"
+    document.querySelector(".btn-arquivo-cia").style.display = 'block'; // Exibe o botão "O Arquivo Perdido da CIA"
+    document.querySelector(".btn-mundo-apos-queda").style.display = 'block'; // Exibe o botão "O Mundo Após a Queda"
+    document.querySelector(".btn-arquivo-deepweb").style.display = 'block'; // Exibe o botão "O Arquivo Perigoso da Deep Web"
+
+    // Transição suave para os botões
+    document.querySelectorAll('.buttons-area a').forEach(btn => {
+      btn.classList.add('show');
+    });
+
     return;
   }
 
@@ -92,8 +101,22 @@ document.getElementById("roadmap-key").addEventListener("click", () => {
     window.open("assets/roadmap_blacknode.pdf", "_blank");
 });
 
-// Novo botão sinistro para abrir página bizarra
+// Novo botão sinistro para abrir página "O Livro Perdido do Vaticano"
 const btnSinistro = document.querySelector(".btn-sinistro");
 btnSinistro.addEventListener("click", () => {
   window.open("livro_perdido_vaticano.html", "_blank"); // Abre a nova página "O Livro Perdido do Vaticano"
 });
+
+// Função para alterar o tema dos botões
+function changeButtonTheme(theme) {
+  // Resetar os temas anteriores
+  document.querySelectorAll('.btn-contrato, .btn-manifesto, .btn-sinistro, .btn-arquivo-cia, .btn-mundo-apos-queda, .btn-arquivo-deepweb')
+    .forEach(btn => btn.classList.remove('fogo', 'sangue', 'gelo', 'vinganca', 'misterio', 'neon'));
+  
+  // Adicionar o novo tema nos botões
+  document.querySelectorAll('.btn-contrato, .btn-manifesto, .btn-sinistro, .btn-arquivo-cia, .btn-mundo-apos-queda, .btn-arquivo-deepweb')
+    .forEach(btn => btn.classList.add(theme));
+}
+
+// Exemplo de como ativar o tema "fogo" nos botões
+changeButtonTheme('fogo');

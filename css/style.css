@@ -1,82 +1,82 @@
-
-/* Layout geral */
+/* Estilo geral do corpo */
 body {
   background-color: #000;
   color: #00ff00;
   font-family: 'Courier New', Courier, monospace;
   margin: 0;
   padding: 0;
-  height: 100dvh; /* dynamic viewport - mais preciso no mobile */
+  height: 100vh;
   display: flex;
   flex-direction: column;
   overflow: hidden;
   position: relative;
 }
 
-/* Substituindo o Supply pelo botão sinistro */
+/* Terminal */
+.terminal {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+  box-sizing: border-box;
+  margin-bottom: 2px;
+}
+
+/* Ajuste da área de digitação */
+.typing-area {
+  font-size: 1.2rem;
+  white-space: pre-wrap;
+  word-break: break-word;
+  max-width: 95vw;
+  border-left: 2px solid #ff4500; /* Laranja queimado */
+  padding-left: 10px;
+  animation: flicker 1s infinite alternate;
+  margin-bottom: 10px;
+}
+
+/* Centralização dos botões */
 .buttons-area {
-  position: absolute;
-  top: 20px;
-  right: 20px;
+  position: fixed;
+  bottom: 10%;
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 1000;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 15px;
   align-items: center;
+  width: 90%;
+  max-width: 350px;
 }
 
-/* Botão contrato */
-.btn-contrato, .btn-manifesto, .btn-sinistro {
-  padding: 8px 12px;
-  font-size: 0.9rem;
+/* Botões com cores mais harmoniosas e misteriosas */
+.btn-contrato, .btn-manifesto, .btn-sinistro, .btn-arquivo-cia, .btn-mundo-apos-queda, .btn-arquivo-deepweb {
+  padding: 15px 20px;
+  font-size: 1.4rem;
   text-decoration: none;
-  transition: all 0.2s ease-in-out;
-  background: transparent;
-  border: 1px dashed;
-}
-
-/* Botão contrato */
-.btn-contrato {
-  color: #00ff00;
-  border-color: #00ff00;
-}
-.btn-contrato:hover {
-  background-color: #00ff00;
-  color: #000;
-}
-
-/* Botão manifesto */
-.btn-manifesto {
-  color: #ff0040;
-  border-color: #ff0040;
-}
-.btn-manifesto:hover {
-  background-color: #ff0040;
-  color: #000;
-}
-
-/* Botão sinistro (Novo botão) */
-.btn-sinistro {
-  color: #ff0000; /* Cor vermelha (sangue) */
-  border-color: #ff0000; /* Borda vermelha */
-  font-size: 1.1rem; /* Levemente maior */
-  padding: 10px 14px; /* Ajuste no padding */
-  border-radius: 8px; /* Bordas arredondadas */
-  animation: glitch 2s infinite, bloodEffect 1.5s infinite; /* Efeito glitch e sangue */
-  display: none; /* Inicialmente invisível */
-  text-decoration: none; /* Remove underline */
+  transition: all 0.3s ease-in-out;
+  background: #2c2c2c; /* Escuro com leve sombra */
+  border: 1px solid #ff6f00; /* Laranja suave */
+  color: #ff4500; /* Laranja vibrante */
+  border-radius: 10px;
+  width: 100%;
+  max-width: 350px;
   text-align: center;
-  font-family: 'Courier New', Courier, monospace;
+  box-shadow: 0 0 10px 2px #ff6f00;
+  font-weight: bold;
+  text-transform: uppercase;
+  opacity: 0.9; /* Menos intensa a opacidade para um visual mais limpo */
 }
 
-.btn-sinistro:hover {
-  background-color: #ff0000;
+.btn-contrato:hover, .btn-manifesto:hover, .btn-sinistro:hover, .btn-arquivo-cia:hover, .btn-mundo-apos-queda:hover, .btn-arquivo-deepweb:hover {
+  background-color: #ff6f00;
   color: #000;
-  text-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000;
-  box-shadow: 0 0 30px #ff0000, 0 0 60px #ff0000;
+  transform: scale(1.05);
+  box-shadow: 0 0 15px 5px #ff8c00; /* Efeito de brilho mais suave */
+  text-shadow: 0 0 10px #ff4500;
+  opacity: 1; /* Mais visibilidade no hover */
 }
 
-/* Animação glitch para o botão sinistro */
+/* Animação Glitch para o botão sinistro */
 @keyframes glitch {
   0% { transform: translateX(1px) translateY(1px); }
   25% { transform: translateX(-1px) translateY(-1px); }
@@ -85,39 +85,37 @@ body {
   100% { transform: translateX(1px) translateY(1px); }
 }
 
-/* Efeito sangue no botão */
-@keyframes bloodEffect {
-  0% { color: #ff0000; }
-  50% { color: #8b0000; /* Cor mais escura, como sangue coagulado */ }
-  100% { color: #ff0000; }
+/* Botão sinistro - Revelar o Livro Perdido do Vaticano */
+.btn-sinistro {
+  font-size: 1.5rem;
+  padding: 15px 25px;
+  animation: glitch 2s infinite;
+  display: none;
+  background-color: #990000;
+  border: 1px solid #ff0000;
+  box-shadow: 0 0 10px 2px #ff0000;
+  text-shadow: 0 0 10px #ff0000;
 }
 
-/* Telegram ícone sempre visível */
-.ghost-key {
-  position: absolute;
-  bottom: 20px;
-  right: 20px;
-  font-size: 22px;
-  color: #00ff00;
-  opacity: 0.5;
-  cursor: pointer;
-  z-index: 999;
-  transition: opacity 0.3s ease, color 0.4s ease;
-  text-shadow: 0 0 6px #00ff00;
-}
-.ghost-key:hover {
-  opacity: 1;
-  color: #00ff00;
+/* Efeito de pulsação para botões */
+@keyframes pulsar {
+  0% { box-shadow: 0 0 10px 2px #ff6f00; }
+  50% { box-shadow: 0 0 20px 5px #ff4500; }
+  100% { box-shadow: 0 0 10px 2px #ff6f00; }
 }
 
-/* Rodapé glitch fixo */
+.btn-contrato, .btn-manifesto, .btn-sinistro, .btn-arquivo-cia, .btn-mundo-apos-queda, .btn-arquivo-deepweb {
+  animation: pulsar 2s infinite alternate;
+}
+
+/* Ajustes do Rodapé */
 .glitch-rodape {
   position: absolute;
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
   font-size: 14px;
-  color: #00ff00;
+  color: #ff0000; /* Cor vermelha */
   opacity: 0.8;
   animation: glitchText 4s infinite;
   font-family: monospace;
@@ -131,38 +129,91 @@ body {
   100% { opacity: 0.8; }
 }
 
-/* Responsivo */
-@media (max-width: 600px) {
-  .typing-area {
-      font-size: 1rem;
-      max-width: 95vw;
-  }
+/* Ícones do Telegram e Rodapé */
+.ghost-key, .roadmap-key {
+  position: absolute;
+  font-size: 22px;
+  color: #ff4500; /* Cor do ícone ajustada para o tema */
+  opacity: 0.7;
+  cursor: pointer;
+  transition: opacity 0.3s ease, color 0.4s ease;
+  text-shadow: 0 0 6px #ff4500;
+  z-index: 999;
+}
 
-  .btn-contrato, .btn-manifesto, .btn-sinistro {
-      font-size: 0.8rem;
-      padding: 6px 10px;
-  }
-
-  .ghost-key {
-      font-size: 20px;
-      bottom: 15px;
-      right: 15px;
-  }
+.ghost-key {
+  bottom: 20px;
+  right: 50px;
 }
 
 .roadmap-key {
-  position: absolute;
   bottom: 20px;
-  left: 20px;
-  font-size: 22px;
-  color: #00ff00;
-  opacity: 0.3;
-  cursor: pointer;
-  z-index: 999;
-  transition: opacity 0.3s ease, color 0.4s ease;
+  left: 50px;
 }
 
-.roadmap-key:hover {
+.ghost-key:hover, .roadmap-key:hover {
   opacity: 1;
-  color: #00ff00;
+  color: #ff4500;
+}
+
+/* Responsivo */
+@media (max-width: 600px) {
+  .typing-area {
+    font-size: 1rem;
+    max-width: 95vw;
+  }
+
+  .btn-contrato, .btn-manifesto, .btn-sinistro, .btn-arquivo-cia, .btn-mundo-apos-queda, .btn-arquivo-deepweb {
+    font-size: 1rem;
+    padding: 8px 12px;
+    max-width: 100%;
+  }
+
+  .ghost-key {
+    font-size: 20px;
+    bottom: 15px;
+    right: 15px;
+  }
+}
+
+/* Tema Fogo */
+.fogo {
+  background-color: #FF4500; /* Laranja queimado */
+  color: #FFF;
+  border: 2px solid #FF0000; /* Vermelho */
+}
+
+/* Tema Sangue Derramado */
+.sangue {
+  background-color: #8B0000; /* Vermelho escuro */
+  color: #FFF;
+  border: 2px solid #660000; /* Vermelho sangue */
+}
+
+/* Tema Gelo */
+.gelo {
+  background-color: #ADD8E6; /* Azul claro */
+  color: #003366; /* Azul escuro */
+  border: 2px solid #B0C4DE; /* Azul gelo */
+}
+
+/* Tema Vingança */
+.vinganca {
+  background-color: #333333; /* Preto */
+  color: #FFD700; /* Dourado */
+  border: 2px solid #B22222; /* Vermelho escuro */
+}
+
+/* Tema Mistério */
+.misterio {
+  background-color: #2E8B57; /* Verde escuro */
+  color: #FFF;
+  border: 2px solid #006400; /* Verde musgo */
+}
+
+/* Tema Neon */
+.neon {
+  background-color: #39FF14; /* Verde neon */
+  color: #0C0C0C; /* Preto */
+  border: 2px solid #FF1493; /* Rosa neon */
 }
