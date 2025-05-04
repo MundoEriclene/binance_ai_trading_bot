@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <title>Contagem para Liberdade</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background: #f8f9fa;
+      color: #212529;
+      padding: 20px;
+    }
+    .container {
+      border: 2px solid #198754;
+      border-radius: 12px;
+      padding: 30px;
+      max-width: 600px;
+      margin: auto;
+      background: #ffffff;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    h2 {
+      color: #198754;
+      text-align: center;
+    }
+    .info {
+      font-size: 1.1rem;
+      margin: 10px 0;
+      text-align: center;
+    }
+    #countdown {
+      font-size: 1.4rem;
+      font-weight: bold;
+      margin-top: 20px;
+      text-align: center;
+    }
+    .quote {
+      font-style: italic;
+      text-align: center;
+      margin-top: 25px;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>⚔️ Missão: 6 Meses de Liberdade</h2>
+    <div class="info">
+      Faltam <strong>{{dias_restantes}}</strong> dias e <strong>{{horas_restantes}}</strong> horas.
+    </div>
+    <div class="info">
+      Progresso: <strong>{{porcentagem}}</strong>% concluído ✅
+    </div>
+    <div id="countdown">⏳ Calculando tempo real restante...</div>
+    <p class="quote">🧠 “Cada dia vencido é um passo mais perto da liberdade.”</p>
+  </div>
+
+  <script>
+    const finalDate = new Date("{{data_final_js}}").getTime();
+
+    function atualizarContagem() {
+      const agora = new Date().getTime();
+      const diff = finalDate - agora;
+
+      if (diff <= 0) {
+        document.getElementById("countdown").innerHTML = "🚀 Missão concluída! Liberdade total.";
+        return;
+      }
+
+      const dias = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const horas = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutos = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const segundos = Math.floor((diff % (1000 * 60)) / 1000);
+
+      document.getElementById("countdown").innerHTML =
+        `⏳ Tempo real restante: <strong>${dias}d ${horas}h ${minutos}m ${segundos}s</strong>`;
+    }
+
+    setInterval(atualizarContagem, 1000);
+    atualizarContagem();
+  </script>
+</body>
+</html>
