@@ -18,8 +18,43 @@ body {
   top: 20px;
   right: 20px;
   z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
 }
 
+/* Botão contrato */
+.btn-contrato, .btn-manifesto, .btn-sinistro {
+  padding: 8px 12px;
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: all 0.2s ease-in-out;
+  background: transparent;
+  border: 1px dashed;
+}
+
+/* Botão contrato */
+.btn-contrato {
+  color: #00ff00;
+  border-color: #00ff00;
+}
+.btn-contrato:hover {
+  background-color: #00ff00;
+  color: #000;
+}
+
+/* Botão manifesto */
+.btn-manifesto {
+  color: #ff0040;
+  border-color: #ff0040;
+}
+.btn-manifesto:hover {
+  background-color: #ff0040;
+  color: #000;
+}
+
+/* Botão sinistro (Novo botão) */
 .btn-sinistro {
   color: #ff00ff; /* Cor mística */
   border-color: #ff00ff; /* Cor de destaque */
@@ -27,7 +62,7 @@ body {
   padding: 10px 14px; /* Ajuste no padding */
   border-radius: 8px; /* Arredondando bordas para um efeito mais misterioso */
   animation: glitch 2s infinite;
-  display: block; /* Assegura que o botão seja exibido como bloco */
+  display: none; /* Inicialmente invisível */
   text-decoration: none; /* Remove underline */
   text-align: center;
 }
