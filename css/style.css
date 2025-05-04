@@ -70,39 +70,6 @@ body {
   color: #000;
 }
 
-/* Rodapé com frases glitch */
-.glitch-rodape {
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 14px;
-  color: #00ff00;
-  opacity: 0.8;
-  animation: glitchText 4s infinite;
-  font-family: monospace;
-  pointer-events: none;
-  z-index: 800;
-  margin-bottom: 30px; /* Ajustado para o rodapé não ficar embaixo dos botões */
-  max-width: 95%; /* Garante que o texto não ultrapasse os limites da tela */
-  text-align: center;
-}
-
-/* Ajuste de animação do rodapé */
-@keyframes glitchText {
-  0% { opacity: 0.8; }
-  50% { opacity: 0.4; transform: translateX(-50%) scale(1.02); }
-  100% { opacity: 0.8; }
-}
-
-/* Responsivo */
-@media (max-width: 600px) {
-  .glitch-rodape {
-    font-size: 12px; /* Ajusta o tamanho da fonte no celular */
-    margin-bottom: 10px; /* Ajusta a margem inferior */
-  }
-}
-
 /* Ícones do Telegram e Rodapé */
 .ghost-key, .roadmap-key {
   position: fixed;
@@ -112,17 +79,17 @@ body {
   cursor: pointer;
   transition: opacity 0.3s ease, color 0.4s ease;
   text-shadow: 0 0 6px #00ff00;
-  z-index: 999;
+  z-index: 1000; /* Garantir que os ícones fiquem na frente de outros elementos */
 }
 
 .ghost-key {
-  bottom: 20px;
-  right: 20px;
+  bottom: 15px;  /* Ajustando a posição no celular */
+  right: 10px;
 }
 
 .roadmap-key {
-  bottom: 20px;
-  left: 20px;
+  bottom: 15px;
+  left: 10px;
 }
 
 .ghost-key:hover, .roadmap-key:hover {
@@ -130,15 +97,44 @@ body {
   color: #00ff00;
 }
 
-/* Responsivo para ícones */
+/* Rodapé com frases glitch */
+.glitch-rodape {
+  position: fixed;
+  bottom: 5%; /* Ajuste para garantir que fique visível no celular */
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 14px;
+  color: #00ff00;
+  opacity: 0.8;
+  animation: glitchText 4s infinite;
+  font-family: monospace;
+  pointer-events: none;
+  z-index: 999;  /* Garantir que o rodapé fique acima dos outros elementos */
+  margin-bottom: 10px;  /* Ajuste a margem para o rodapé não ficar sobre os botões */
+  text-align: center;
+}
+
+@keyframes glitchText {
+  0% { opacity: 0.8; }
+  50% { opacity: 0.4; transform: translateX(-50%) scale(1.02); }
+  100% { opacity: 0.8; }
+}
+
+/* Responsivo para celulares */
 @media (max-width: 600px) {
   .ghost-key, .roadmap-key {
     font-size: 25px; /* Ajusta o tamanho no celular */
-    bottom: 15px;
-    right: 15px;
+    bottom: 10px;
+    left: 5%;
+    right: 5%;
+  }
+
+  .glitch-rodape {
+    font-size: 12px; /* Ajusta o tamanho da fonte do rodapé no celular */
+    bottom: 10%;  /* Ajuste a posição do rodapé */
+    margin-bottom: 15px;  /* Garante que o rodapé não sobreponha nada */
   }
 }
-
 
 /* Responsivo para mobile */
 @media (max-width: 600px) {
