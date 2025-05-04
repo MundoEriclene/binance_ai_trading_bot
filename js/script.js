@@ -4,12 +4,6 @@ const rodape = document.getElementById("rodape-glitch");
 const manifestoLink = document.querySelector(".btn-manifesto");
 const ghostKey = document.getElementById("ghost-key");
 
-// Simulação de supply escasso
-let supplyTotal = 1000000;
-let supplyVisivel = 999001; // Ainda mais próximo do total
-let contadorAtivo = false;
-let contadorEl = null;
-
 // Frases da digitação
 const messages = [
   ">>> Acesso não autorizado... decodificando protocolo...",
@@ -40,12 +34,8 @@ function typeNextCharacter() {
     typingSound.currentTime = 0;
     typingFinalizado = true;
 
-    // Cria contador após finalização
-    contadorEl = document.createElement("div");
-    contadorEl.className = "contador-supply";
-    contadorEl.id = "contador";
-    contadorEl.textContent = `Supply: ${supplyVisivel.toLocaleString()} / 1.000.000`;
-    document.body.appendChild(contadorEl);
+    // Substituir o Supply pelo botão sinistro
+    document.querySelector(".btn-sinistro").style.display = 'block'; // Exibe o botão após a digitação
     return;
   }
 
@@ -63,23 +53,6 @@ function typeNextCharacter() {
   }
 }
 
-// Atualiza contador de forma realista
-function atualizarContador() {
-  if (!contadorEl) return;
-
-  if (supplyVisivel < supplyTotal) {
-    const incremento = Math.random() < 0.9 ? 1 : 0; // 90% chance de subir 1, 10% de nada
-    supplyVisivel += incremento;
-
-    contadorEl.textContent = `Supply: ${supplyVisivel.toLocaleString()} / 1.000.000`;
-
-    // Diminui a velocidade conforme se aproxima do total
-    const distancia = supplyTotal - supplyVisivel;
-    const delay = Math.min(4000, 1000 + Math.random() * (distancia / 2));
-    setTimeout(atualizarContador, delay);
-  }
-}
-
 // Inicia tudo ao clicar
 window.addEventListener("click", () => {
   if (!typingInProgress && !typingFinalizado) {
@@ -92,11 +65,6 @@ window.addEventListener("click", () => {
     }).catch(() => {
       typeNextCharacter();
     });
-  }
-
-  if (typingFinalizado && !contadorAtivo) {
-    contadorAtivo = true;
-    atualizarContador();
   }
 });
 

@@ -12,94 +12,14 @@ body {
   position: relative;
 }
 
-/* Supply fixo no topo */
-.contador-supply {
+/* Substituindo o Supply pelo botão sinistro */
+.buttons-area {
   position: absolute;
   top: 20px;
   right: 20px;
-  font-size: 0.95rem;
-  color: #00ff00;
-  font-family: monospace;
   z-index: 1000;
 }
 
-/* Terminal ocupa o meio com scroll interno */
-.terminal {
-  flex: 1;
-  overflow-y: auto;
-  padding: 40px 20px;
-  box-sizing: border-box;
-}
-
-/* Texto digitado */
-.typing-area {
-  font-size: 1.2rem;
-  line-height: 1.5;
-  white-space: pre-wrap;
-  word-break: break-word;
-  max-width: 90vw;
-  border-left: 2px solid #00ff00;
-  padding-left: 10px;
-  animation: flicker 1s infinite alternate;
-  overflow-wrap: break-word;
-  margin-bottom: 30px;
-}
-
-.typing-area::after {
-  content: "_";
-  animation: blink 0.8s steps(1) infinite;
-}
-
-/* Cursor */
-@keyframes flicker {
-  0% { opacity: 0.95; }
-  50% { opacity: 1; }
-  100% { opacity: 0.92; }
-}
-@keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
-}
-
-/* Botões centralizados */
-.buttons-area {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  align-items: center;
-  margin-bottom: 60px;
-}
-
-.btn-contrato, .btn-manifesto, .btn-sinistro {
-  padding: 8px 12px;
-  font-size: 0.9rem;
-  text-decoration: none;
-  transition: all 0.2s ease-in-out;
-  background: transparent;
-  border: 1px dashed;
-}
-
-/* Botão contrato */
-.btn-contrato {
-  color: #00ff00;
-  border-color: #00ff00;
-}
-.btn-contrato:hover {
-  background-color: #00ff00;
-  color: #000;
-}
-
-/* Botão manifesto */
-.btn-manifesto {
-  color: #ff0040;
-  border-color: #ff0040;
-}
-.btn-manifesto:hover {
-  background-color: #ff0040;
-  color: #000;
-}
-
-/* Botão sinistro (Novo botão) */
 .btn-sinistro {
   color: #ff00ff; /* Cor mística */
   border-color: #ff00ff; /* Cor de destaque */
@@ -107,7 +27,11 @@ body {
   padding: 10px 14px; /* Ajuste no padding */
   border-radius: 8px; /* Arredondando bordas para um efeito mais misterioso */
   animation: glitch 2s infinite;
+  display: block; /* Assegura que o botão seja exibido como bloco */
+  text-decoration: none; /* Remove underline */
+  text-align: center;
 }
+
 .btn-sinistro:hover {
   background-color: #ff00ff;
   color: #000;
@@ -179,6 +103,7 @@ body {
       right: 15px;
   }
 }
+
 .roadmap-key {
   position: absolute;
   bottom: 20px;
@@ -190,6 +115,7 @@ body {
   z-index: 999;
   transition: opacity 0.3s ease, color 0.4s ease;
 }
+
 .roadmap-key:hover {
   opacity: 1;
   color: #00ff00;
