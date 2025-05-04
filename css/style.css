@@ -36,17 +36,17 @@ body {
 /* Centralização dos botões */
 .buttons-area {
   position: fixed;
-  bottom: 15%; /* Aumentando o espaço para que não fiquem muito próximos */
+  bottom: 10%;
   left: 50%;
   transform: translateX(-50%);
   z-index: 1000;
   display: flex;
   flex-direction: column;
-  gap: 10px; /* Ajustado para botões mais distantes */
+  gap: 5px;
   align-items: center;
-  width: 90%;
+  width: 80%; /* Ajustado para melhor visualização em telas pequenas */
   max-width: 350px;
-  padding: 10px; /* Garantindo que os botões não fiquem muito próximos das bordas */
+  padding: 10px; /* Melhor posicionamento dos botões */
 }
 
 /* Botões comuns */
@@ -54,7 +54,6 @@ body {
   padding: 10px 15px;
   font-size: 1.2rem;
   text-decoration: none;
-  transition: all 0.2s ease-in-out;
   background: transparent;
   border: 1px dashed;
   text-align: center;
@@ -71,26 +70,9 @@ body {
   color: #000;
 }
 
-/* Botão sinistro - Revelar o Livro Perdido do Vaticano */
-.btn-sinistro {
-  font-size: 1.3rem;
-  padding: 12px 18px;
-  animation: glitch 2s infinite;
-  display: none;
-}
-
-/* Animação glitch para o botão sinistro */
-@keyframes glitch {
-  0% { transform: translateX(1px) translateY(1px); }
-  25% { transform: translateX(-1px) translateY(-1px); }
-  50% { transform: translateX(1px) translateY(1px); }
-  75% { transform: translateX(-1px) translateY(-1px); }
-  100% { transform: translateX(1px) translateY(1px); }
-}
-
 /* Ajustes do Rodapé */
 .glitch-rodape {
-  position: fixed; /* Garantindo que fique visível sempre */
+  position: absolute;
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
@@ -101,20 +83,13 @@ body {
   font-family: monospace;
   pointer-events: none;
   z-index: 800;
-  width: 100%;
-  text-align: center; /* Centralizando o texto */
-}
-
-@keyframes glitchText {
-  0% { opacity: 0.8; }
-  50% { opacity: 0.4; transform: translateX(-50%) scale(1.02); }
-  100% { opacity: 0.8; }
+  margin-bottom: 30px; /* Ajustado para o rodapé não ficar embaixo dos botões */
 }
 
 /* Ícones do Telegram e Rodapé */
 .ghost-key, .roadmap-key {
   position: absolute;
-  font-size: 30px; /* Aumentando o tamanho para garantir que fiquem visíveis */
+  font-size: 22px;
   color: #00ff00;
   opacity: 0.7;
   cursor: pointer;
@@ -124,13 +99,13 @@ body {
 }
 
 .ghost-key {
-  bottom: 15px;
-  right: 20px;
+  bottom: 20px;
+  right: 20px; /* Ajuste para melhor visibilidade */
 }
 
 .roadmap-key {
-  bottom: 15px;
-  left: 20px;
+  bottom: 20px;
+  left: 20px; /* Ajuste para melhor visibilidade */
 }
 
 .ghost-key:hover, .roadmap-key:hover {
@@ -138,11 +113,11 @@ body {
   color: #00ff00;
 }
 
-/* Responsivo */
+/* Responsivo para mobile */
 @media (max-width: 600px) {
   .typing-area {
     font-size: 1rem;
-    max-width: 95vw;
+    max-width: 90vw;
   }
 
   .btn-contrato, .btn-manifesto, .btn-sinistro, .btn-arquivo-cia, .btn-mundo-apos-queda, .btn-arquivo-deepweb {
@@ -151,57 +126,23 @@ body {
     max-width: 100%;
   }
 
+  .buttons-area {
+    width: 90%; /* Garantir que os botões fiquem mais próximos ao centro */
+  }
+
   .ghost-key {
-    font-size: 25px;
+    font-size: 20px;
     bottom: 10px;
     right: 10px;
   }
 
   .roadmap-key {
-    font-size: 25px;
+    font-size: 20px;
     bottom: 10px;
     left: 10px;
   }
-}
 
-/* Tema Fogo */
-.fogo {
-  background-color: #FF4500; /* Laranja queimado */
-  color: #FFF;
-  border: 2px solid #FF0000; /* Vermelho */
-}
-
-/* Tema Sangue Derramado */
-.sangue {
-  background-color: #8B0000; /* Vermelho escuro */
-  color: #FFF;
-  border: 2px solid #660000; /* Vermelho sangue */
-}
-
-/* Tema Gelo */
-.gelo {
-  background-color: #ADD8E6; /* Azul claro */
-  color: #003366; /* Azul escuro */
-  border: 2px solid #B0C4DE; /* Azul gelo */
-}
-
-/* Tema Vingança */
-.vinganca {
-  background-color: #333333; /* Preto */
-  color: #FFD700; /* Dourado */
-  border: 2px solid #B22222; /* Vermelho escuro */
-}
-
-/* Tema Mistério */
-.misterio {
-  background-color: #2E8B57; /* Verde escuro */
-  color: #FFF;
-  border: 2px solid #006400; /* Verde musgo */
-}
-
-/* Tema Neon */
-.neon {
-  background-color: #39FF14; /* Verde neon */
-  color: #0C0C0C; /* Preto */
-  border: 2px solid #FF1493; /* Rosa neon */
+  .glitch-rodape {
+    font-size: 12px;
+  }
 }
