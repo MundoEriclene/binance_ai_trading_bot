@@ -36,13 +36,13 @@ body {
 /* Centralização dos botões */
 .buttons-area {
   position: fixed;
-  bottom: 15%; /* Ajustado para garantir que os botões não se sobreponham */
+  bottom: 10%;
   left: 50%;
   transform: translateX(-50%);
   z-index: 1000;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 5px;
   align-items: center;
   width: 80%; /* Ajustado para melhor visualização em telas pequenas */
   max-width: 350px;
@@ -73,7 +73,7 @@ body {
 /* Ícones do Telegram e Rodapé */
 .ghost-key, .roadmap-key {
   position: fixed;
-  font-size: 30px; /* Tamanho maior para ícones */
+  font-size: 30px; /* Aumentando o tamanho dos ícones */
   color: #00ff00;
   opacity: 0.7;
   cursor: pointer;
@@ -83,13 +83,13 @@ body {
 }
 
 .ghost-key {
-  bottom: 15%;  /* Ajuste para celulares */
-  right: 5%; /* Ajustado para estar mais distante da borda */
+  bottom: 15px;  /* Ajustando a posição no celular */
+  right: 10px; /* À direita */
 }
 
 .roadmap-key {
-  bottom: 15%;
-  left: 5%; /* Ajuste para evitar sobreposição */
+  bottom: 15px;
+  left: 10px; /* À esquerda */
 }
 
 .ghost-key:hover, .roadmap-key:hover {
@@ -100,7 +100,7 @@ body {
 /* Rodapé com frases glitch */
 .glitch-rodape {
   position: fixed;
-  bottom: 5%; /* Ajuste para garantir que o rodapé não sobreponha os botões */
+  bottom: 5%; /* Ajuste para garantir que fique visível no celular */
   left: 50%;
   transform: translateX(-50%);
   font-size: 14px;
@@ -109,8 +109,8 @@ body {
   animation: glitchText 4s infinite;
   font-family: monospace;
   pointer-events: none;
-  z-index: 999; /* Manter o rodapé acima de outros elementos */
-  margin-bottom: 10px;
+  z-index: 999;  /* Garantir que o rodapé fique acima dos outros elementos */
+  margin-bottom: 10px;  /* Ajuste a margem para o rodapé não ficar sobre os botões */
   text-align: center;
 }
 
@@ -124,7 +124,7 @@ body {
 @media (max-width: 600px) {
   .ghost-key, .roadmap-key {
     font-size: 25px; /* Ajusta o tamanho no celular */
-    bottom: 10%;
+    bottom: 10px;
     left: 5%;
     right: 5%;
   }
@@ -137,17 +137,31 @@ body {
 
   /* Botões */
   .buttons-area {
-    width: 100%;
-    max-width: 100%;
-    padding: 10px;
+    width: 90%; /* Ajusta os botões para ocupar menos espaço */
+    max-width: 90%; /* Deixa os botões mais estreitos */
     left: 0;
     right: 0;
-    transform: none;
   }
 
   .btn-contrato, .btn-manifesto, .btn-sinistro, .btn-arquivo-cia, .btn-mundo-apos-queda, .btn-arquivo-deepweb {
     font-size: 1rem;
     padding: 8px 12px;
-    max-width: 100%;
+    max-width: 100%; /* Ajusta os botões para caberem melhor */
+  }
+
+  .ghost-key {
+    font-size: 20px;
+    bottom: 10px;
+    right: 10px;
+  }
+
+  .roadmap-key {
+    font-size: 20px;
+    bottom: 10px;
+    left: 10px;
+  }
+
+  .glitch-rodape {
+    font-size: 12px;
   }
 }
