@@ -5,7 +5,7 @@ body {
   font-family: 'Courier New', Courier, monospace;
   margin: 0;
   padding: 0;
-  height: 100vh; /* Garantir que a altura da página não ultrapasse a tela */
+  height: 100vh; /* Ajuste para garantir que a altura da página não ultrapasse a tela */
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -154,7 +154,6 @@ body {
     right: 15px;
   }
 }
-
 /* Tema Fogo */
 .fogo {
   background-color: #FF4500; /* Laranja queimado */
