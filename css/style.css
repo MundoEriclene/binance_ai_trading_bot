@@ -12,31 +12,25 @@ body {
   position: relative;
 }
 
-/* Ajuste do terminal para reduzir o espaço */
-.terminal {
-  flex: 1;
-  overflow-y: auto;
-  padding: 20px;
-  box-sizing: border-box;
-  margin-bottom: 10px; /* Ajusta o espaço entre o texto e os botões */
-}
-
-/* Ajuste da área de digitação */
+/* Ajuste para área de digitação */
 .typing-area {
   font-size: 1.2rem;
   white-space: pre-wrap;
   word-break: break-word;
-  max-width: 95vw;
+  max-width: 95vw; /* Ajuste para ocupar mais espaço em telas pequenas */
   border-left: 2px solid #00ff00;
   padding-left: 10px;
   animation: flicker 1s infinite alternate;
-  margin-bottom: 0; /* Reduzir espaço entre o texto e os botões */
+  overflow-wrap: break-word;
+  margin-bottom: 10px;
+  flex-grow: 1; /* Faz a área de digitação crescer até preencher o espaço disponível */
+  overflow-y: auto; /* Permite rolar para cima se o conteúdo for maior que o espaço disponível */
 }
 
-/* Centralização dos botões */
+/* Centralização dos botões na parte inferior da tela */
 .buttons-area {
   position: absolute;
-  top: 75%; /* Ajustar para os botões ficarem mais perto do rodapé */
+  top: 90%; /* Ajuste para colocar os botões mais próximos do rodapé */
   left: 50%;
   transform: translateX(-50%); /* Centraliza horizontalmente */
   z-index: 1000;
@@ -44,11 +38,12 @@ body {
   flex-direction: column;
   gap: 12px;
   align-items: center;
-  width: 90%;
-  max-width: 350px;
+  width: 90%; /* Garantir que os botões ocupem toda a largura possível */
+  max-width: 350px; /* Limitar o tamanho máximo dos botões */
+  margin-bottom: 20px; /* Ajusta o espaço para evitar que o conteúdo sobreponha os botões */
 }
 
-/* Botões comuns */
+/* Botão contrato */
 .btn-contrato, .btn-manifesto, .btn-sinistro, .btn-arquivo-cia, .btn-mundo-apos-queda, .btn-arquivo-deepweb {
   padding: 10px 15px;
   font-size: 1.2rem;
@@ -58,24 +53,76 @@ body {
   border: 1px dashed;
   text-align: center;
   border-radius: 8px;
-  width: 100%;
-  max-width: 300px;
-  color: #ff00ff;
-  border-color: #ff00ff;
-  box-shadow: 0 0 10px 2px #ff00ff;
+  width: 100%; /* Garantir que os botões ocupem toda a largura disponível */
 }
 
-.btn-contrato:hover, .btn-manifesto:hover, .btn-sinistro:hover, .btn-arquivo-cia:hover, .btn-mundo-apos-queda:hover, .btn-arquivo-deepweb:hover {
-  background-color: #ff00ff;
+/* Botão contrato */
+.btn-contrato {
+  color: #00ff00; /* Verde para contrato */
+  border-color: #00ff00;
+}
+.btn-contrato:hover {
+  background-color: #00ff00;
+  color: #000;
+}
+
+/* Botão manifesto */
+.btn-manifesto {
+  color: #ff0040; /* Vermelho para manifesto */
+  border-color: #ff0040;
+}
+.btn-manifesto:hover {
+  background-color: #ff0040;
   color: #000;
 }
 
 /* Botão sinistro - Revelar o Livro Perdido do Vaticano */
 .btn-sinistro {
-  font-size: 1.3rem;
-  padding: 12px 18px;
+  color: #ff00ff; /* Roxo para algo místico */
+  border-color: #ff00ff; /* Cor de destaque */
+  font-size: 1.3rem; /* Levemente maior */
+  padding: 12px 18px; /* Ajuste no padding */
+  border-radius: 8px; /* Arredondando bordas */
   animation: glitch 2s infinite;
-  display: none; /* Inicialmente invisível */
+  display: block; /* Tornar visível */
+  text-decoration: none; /* Remove underline */
+  text-align: center;
+  box-shadow: 0 0 10px 2px #ff00ff;
+}
+
+.btn-sinistro:hover {
+  background-color: #ff00ff;
+  color: #000;
+}
+
+/* Botão Arquivo Perdido da CIA */
+.btn-arquivo-cia {
+  color: #0000ff; /* Azul para arquivos secretos */
+  border-color: #0000ff;
+}
+.btn-arquivo-cia:hover {
+  background-color: #0000ff;
+  color: #fff;
+}
+
+/* Botão Mundo Após a Queda */
+.btn-mundo-apos-queda {
+  color: #ff7f00; /* Laranja para algo ousado */
+  border-color: #ff7f00;
+}
+.btn-mundo-apos-queda:hover {
+  background-color: #ff7f00;
+  color: #fff;
+}
+
+/* Botão Arquivo Perigoso da Deep Web */
+.btn-arquivo-deepweb {
+  color: #555555; /* Cinza escuro para algo perigoso e oculto */
+  border-color: #555555;
+}
+.btn-arquivo-deepweb:hover {
+  background-color: #555555;
+  color: #fff;
 }
 
 /* Animação glitch para o botão sinistro */
@@ -87,7 +134,7 @@ body {
   100% { transform: translateX(1px) translateY(1px); }
 }
 
-/* Ajustes do Rodapé */
+/* Rodapé glitch fixo */
 .glitch-rodape {
   position: absolute;
   bottom: 0;
@@ -108,34 +155,19 @@ body {
   100% { opacity: 0.8; }
 }
 
-/* Ícones do Telegram e Rodapé */
-.ghost-key, .roadmap-key {
-  position: absolute;
-  font-size: 22px;
-  color: #00ff00;
-  opacity: 0.5;
-  cursor: pointer;
-  transition: opacity 0.3s ease, color 0.4s ease;
-  text-shadow: 0 0 6px #00ff00;
-  z-index: 999;
-}
-
-.ghost-key {
-  bottom: 20px;
-  right: 20px;
-}
-
-.roadmap-key {
-  bottom: 20px;
-  left: 20px;
-  opacity: 0.3;
-  cursor: pointer;
-  z-index: 999;
-}
-
-.ghost-key:hover, .roadmap-key:hover {
-  opacity: 1;
-  color: #00ff00;
+/* Ajuste do texto de digitação para se adaptar a telas pequenas */
+.typing-area {
+  font-size: 1.2rem;
+  white-space: pre-wrap;
+  word-break: break-word;
+  max-width: 95vw; /* Ajuste para ocupar mais espaço em telas pequenas */
+  border-left: 2px solid #00ff00;
+  padding-left: 10px;
+  animation: flicker 1s infinite alternate;
+  overflow-wrap: break-word;
+  margin-bottom: 10px;
+  flex-grow: 1; /* Faz a área de digitação crescer até preencher o espaço disponível */
+  overflow-y: auto; /* Permite rolar para cima se o conteúdo for maior que o espaço disponível */
 }
 
 /* Responsivo */
@@ -148,7 +180,7 @@ body {
   .btn-contrato, .btn-manifesto, .btn-sinistro, .btn-arquivo-cia, .btn-mundo-apos-queda, .btn-arquivo-deepweb {
     font-size: 1rem;
     padding: 8px 12px;
-    max-width: 100%;
+    max-width: 100%; /* Remover limite de tamanho em telas pequenas */
   }
 
   .ghost-key {
@@ -158,3 +190,54 @@ body {
   }
 }
 
+/* Telegram ícone sempre visível */
+.ghost-key {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  font-size: 22px;
+  color: #00ff00;
+  opacity: 0.5;
+  cursor: pointer;
+  z-index: 999;
+  transition: opacity 0.3s ease, color 0.4s ease;
+  text-shadow: 0 0 6px #00ff00;
+}
+
+.ghost-key:hover {
+  opacity: 1;
+  color: #00ff00;
+}
+
+/* Estilo comum para os ícones de Telegram e Rodapé */
+.ghost-key, .roadmap-key {
+  position: absolute;
+  font-size: 22px;
+  color: #00ff00;
+  opacity: 0.5;
+  cursor: pointer;
+  transition: opacity 0.3s ease, color 0.4s ease;
+  text-shadow: 0 0 6px #00ff00;
+  z-index: 999;
+}
+
+/* Ícone de Telegram */
+.ghost-key {
+  bottom: 20px;
+  right: 20px;
+}
+
+/* Ícone do rodapé - 🔐 (Roadmap) */
+.roadmap-key {
+  bottom: 20px;
+  left: 20px;
+  opacity: 0.3;
+  cursor: pointer;
+  z-index: 999;
+}
+
+/* Hover para ambos os ícones */
+.ghost-key:hover, .roadmap-key:hover {
+  opacity: 1;
+  color: #00ff00;
+}
