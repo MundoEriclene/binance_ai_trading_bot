@@ -243,3 +243,61 @@ body {
   opacity: 1;
   color: #00ff00;
 }
+/* Ícones - Telegram e Rodapé */
+.ghost-key, .roadmap-key {
+  position: fixed; /* Alterar para fixed, para que sempre fiquem visíveis */
+  font-size: 22px;
+  color: #00ff00;
+  opacity: 0.5;
+  cursor: pointer;
+  transition: opacity 0.3s ease, color 0.4s ease;
+  text-shadow: 0 0 6px #00ff00;
+  z-index: 999;
+}
+
+.ghost-key {
+  bottom: 15px; /* Ajuste a distância para o rodapé */
+  right: 15px;
+}
+
+.roadmap-key {
+  bottom: 15px; /* Ajuste a distância para o rodapé */
+  left: 15px;
+}
+
+/* Ajuste de visibilidade para o rodapé */
+.glitch-rodape {
+  position: fixed;
+  bottom: 5%; /* Ajuste o rodapé para ficar visível */
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 14px;
+  color: #00ff00;
+  opacity: 0.8;
+  animation: glitchText 4s infinite;
+  font-family: monospace;
+  pointer-events: none;
+  z-index: 998;
+  text-align: center;
+}
+
+@keyframes glitchText {
+  0% { opacity: 0.8; }
+  50% { opacity: 0.4; transform: translateX(-50%) scale(1.02); }
+  100% { opacity: 0.8; }
+}
+
+/* Responsivo para celular */
+@media (max-width: 600px) {
+  .ghost-key, .roadmap-key {
+    font-size: 18px; /* Ajustar o tamanho do ícone no celular */
+    bottom: 20px; /* Colocar um pouco mais afastado do rodapé */
+    right: 15px;
+    left: 15px;
+  }
+
+  .glitch-rodape {
+    font-size: 12px; /* Ajusta o tamanho do rodapé */
+    bottom: 10%; /* Ajusta para ficar um pouco mais distante */
+  }
+}
