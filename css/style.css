@@ -31,7 +31,7 @@ body {
 /* Centralização dos botões na parte inferior da tela */
 .buttons-area {
   position: absolute;
-  top: 60%; /* Ajustando para os botões ficarem mais próximos da parte inferior */
+  top: 50%; /* Ajustando para os botões ficarem mais próximos da parte inferior */
   left: 50%;
   transform: translateX(-50%); /* Centraliza horizontalmente */
   z-index: 1000;
