@@ -5,7 +5,7 @@ body {
   font-family: 'Courier New', Courier, monospace;
   margin: 0;
   padding: 0;
-  height: 100dvh; /* dynamic viewport - mais preciso no mobile */
+  height: 100vh; /* Ajuste para não ter overflow */
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -24,13 +24,14 @@ body {
   overflow-wrap: break-word;
   margin-bottom: 10px;
   flex-grow: 1; /* Faz a área de digitação crescer até preencher o espaço disponível */
+  max-height: 65vh; /* Limita a altura da área de digitação */
   overflow-y: auto; /* Permite rolar para cima se o conteúdo for maior que o espaço disponível */
 }
 
 /* Centralização dos botões na parte inferior da tela */
 .buttons-area {
   position: absolute;
-  top: 90%; /* Ajuste para colocar os botões mais próximos do rodapé */
+  top: 60%; /* Ajustando para os botões ficarem mais próximos da parte inferior */
   left: 50%;
   transform: translateX(-50%); /* Centraliza horizontalmente */
   z-index: 1000;
@@ -43,7 +44,7 @@ body {
   margin-bottom: 20px; /* Ajusta o espaço para evitar que o conteúdo sobreponha os botões */
 }
 
-/* Botão contrato */
+/* Botões */
 .btn-contrato, .btn-manifesto, .btn-sinistro, .btn-arquivo-cia, .btn-mundo-apos-queda, .btn-arquivo-deepweb {
   padding: 10px 15px;
   font-size: 1.2rem;
@@ -167,6 +168,7 @@ body {
   overflow-wrap: break-word;
   margin-bottom: 10px;
   flex-grow: 1; /* Faz a área de digitação crescer até preencher o espaço disponível */
+  max-height: 65vh; /* Limita a altura da área de digitação */
   overflow-y: auto; /* Permite rolar para cima se o conteúdo for maior que o espaço disponível */
 }
 
