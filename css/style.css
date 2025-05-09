@@ -5,7 +5,7 @@ body {
   font-family: 'Courier New', Courier, monospace;
   margin: 0;
   padding: 0;
-  height: 100vh; /* Ajuste para não ter overflow */
+  height: 100vh;
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -17,21 +17,21 @@ body {
   font-size: 1.2rem;
   white-space: pre-wrap;
   word-break: break-word;
-  max-width: 95vw; /* Ajuste para ocupar mais espaço em telas pequenas */
+  max-width: 95vw;
   border-left: 2px solid #00ff00;
   padding-left: 10px;
   animation: flicker 1s infinite alternate;
   overflow-wrap: break-word;
   margin-bottom: 10px;
   flex-grow: 1;
-  max-height: 60vh; /* Limita a altura da área de digitação */
+  max-height: 60vh;
   overflow-y: auto;
 }
 
 /* Centralização dos botões na parte inferior da tela */
 .buttons-area {
   position: absolute;
-  top: 55%; /* Ajuste para os botões ficarem mais para cima na tela */
+  top: 55%;
   left: 50%;
   transform: translateX(-50%);
   z-index: 1000;
@@ -138,7 +138,7 @@ body {
 /* Rodapé glitch fixo */
 .glitch-rodape {
   position: fixed;
-  bottom: 10%; /* Ajustado para garantir que o rodapé não se sobreponha aos botões */
+  bottom: 0;
   left: 50%;
   transform: translateX(-50%);
   font-size: 14px;
@@ -149,6 +149,8 @@ body {
   pointer-events: none;
   z-index: 998;
   text-align: center;
+  width: 100%;
+  margin-bottom: 10px;
 }
 
 @keyframes glitchText {
@@ -157,124 +159,65 @@ body {
   100% { opacity: 0.8; }
 }
 
-/* Responsividade para celular */
-@media (max-width: 600px) {
-  .ghost-key, .roadmap-key {
-    font-size: 18px;
-    bottom: 20px;
-    right: 15px;
-    left: 15px;
-  }
-
-  .glitch-rodape {
-    font-size: 12px;
-    bottom: 10%; /* Ajuste para ficar visível no celular */
-  }
-
-  .buttons-area {
-    top: 60%; /* Ajuste para não sobrepor os ícones ou o rodapé */
-  }
-}
-
-/* Ícones - Telegram e Rodapé */
+/* Garantir que os ícones fiquem fixos na tela */
 .ghost-key, .roadmap-key {
-  position: fixed;
-  font-size: 22px;
+  position: fixed;  /* Fixar os ícones na tela */
+  font-size: 2rem;  /* Tamanho inicial dos ícones */
   color: #00ff00;
-  opacity: 0.5;
+  opacity: 0.7;
   cursor: pointer;
   transition: opacity 0.3s ease, color 0.4s ease;
   text-shadow: 0 0 6px #00ff00;
-  z-index: 999;
+  z-index: 9999; /* Garantir que fiquem acima de outros conteúdos */
 }
 
+/* Posicionamento do ícone no canto inferior direito */
 .ghost-key {
-  bottom: 15px;
-  right: 15px;
+  bottom: 20px;
+  right: 20px;
 }
 
+/* Posicionamento do ícone no canto inferior esquerdo */
 .roadmap-key {
-  bottom: 15px;
-  left: 15px;
+  bottom: 20px;
+  left: 20px;
 }
 
+/* Efeito de hover para os ícones */
 .ghost-key:hover, .roadmap-key:hover {
   opacity: 1;
   color: #00ff00;
 }
-/* Estilos para cada botão */
-.btn-contrato {
-  color: #00ff00;
-  border-color: #00ff00;
-}
-.btn-contrato:hover {
-  background-color: #00ff00;
-  color: #000;
+
+/* Responsividade para tablets (telas até 768px) */
+@media (max-width: 768px) {
+  .ghost-key, .roadmap-key {
+    font-size: 1.8rem;
+    bottom: 15px;   /* Ajuste do espaço inferior */
+    left: 5%;       /* Ajuste da distância à esquerda */
+    right: 5%;      /* Ajuste da distância à direita */
+  }
 }
 
-.btn-manifesto {
-  color: #ff0040;
-  border-color: #ff0040;
-}
-.btn-manifesto:hover {
-  background-color: #ff0040;
-  color: #000;
-}
-
-.btn-sinistro {
-  color: #ff00ff;
-  border-color: #ff00ff;
-  font-size: 1.3rem;
-  padding: 12px 18px;
-  border-radius: 8px;
-  animation: glitch 2s infinite;
-  display: block;
-  text-decoration: none;
-  text-align: center;
-  box-shadow: 0 0 10px 2px #ff00ff;
-}
-
-.btn-sinistro:hover {
-  background-color: #ff00ff;
-  color: #000;
-}/* Ajustes de rodapé e animação */
-.glitch-rodape {
-  position: fixed;
-  bottom: 10%; /* Ajuste para o rodapé não sobrepor os botões */
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 14px;
-  color: #00ff00;
-  opacity: 0.8;
-  animation: glitchText 4s infinite;
-  font-family: monospace;
-  pointer-events: none;
-  z-index: 998;
-  text-align: center;
-}
-
-@keyframes glitchText {
-  0% { opacity: 0.8; }
-  50% { opacity: 0.4; transform: translateX(-50%) scale(1.02); }
-  100% { opacity: 0.8; }
+/* Responsividade para celulares (telas até 600px) */
+@media (max-width: 600px) {
+  .ghost-key, .roadmap-key {
+    font-size: 1.5rem;
+    bottom: 15px;   /* Menos espaço no fundo */
+    left: 5%;       /* Ajuste da distância à esquerda */
+    right: 5%;      /* Ajuste da distância à direita */
+  }
 }
 
 /* Responsividade para celular */
 @media (max-width: 600px) {
-  .ghost-key, .roadmap-key {
-    font-size: 18px;
-    bottom: 20px;
-    right: 15px;
-    left: 15px;
-  }
-
   .glitch-rodape {
     font-size: 12px;
-    bottom: 10%;
+    bottom: 5%;
   }
 
   .buttons-area {
-    top: 50%; /* Ajuste para que os botões fiquem mais ajustados no celular */
+    top: 45%;
   }
 
   .typing-area {
@@ -287,31 +230,4 @@ body {
     padding: 8px 12px;
     max-width: 100%;
   }
-}
-
-/* Ícones - Telegram e Rodapé */
-.ghost-key, .roadmap-key {
-  position: fixed;
-  font-size: 22px;
-  color: #00ff00;
-  opacity: 0.5;
-  cursor: pointer;
-  transition: opacity 0.3s ease, color 0.4s ease;
-  text-shadow: 0 0 6px #00ff00;
-  z-index: 999;
-}
-
-.ghost-key {
-  bottom: 15px;
-  right: 15px;
-}
-
-.roadmap-key {
-  bottom: 15px;
-  left: 15px;
-}
-
-.ghost-key:hover, .roadmap-key:hover {
-  opacity: 1;
-  color: #00ff00;
 }
