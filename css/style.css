@@ -31,7 +31,7 @@ body {
 /* Centralização dos botões na parte inferior da tela */
 .buttons-area {
   position: absolute;
-  top: 55%;
+  top: 50%;
   left: 50%;
   transform: translateX(-50%);
   z-index: 1000;
@@ -137,8 +137,8 @@ body {
 
 /* Rodapé glitch fixo */
 .glitch-rodape {
-  position: fixed;
-  bottom: 0;
+  position: absolute;
+  bottom: 5%; /* Ajustado para garantir que o rodapé não se sobreponha aos botões */
   left: 50%;
   transform: translateX(-50%);
   font-size: 14px;
@@ -149,8 +149,6 @@ body {
   pointer-events: none;
   z-index: 998;
   text-align: center;
-  width: 100%;
-  margin-bottom: 10px;
 }
 
 @keyframes glitchText {
@@ -159,65 +157,22 @@ body {
   100% { opacity: 0.8; }
 }
 
-/* Garantir que os ícones fiquem fixos na tela */
-.ghost-key, .roadmap-key {
-  position: fixed;  /* Fixar os ícones na tela */
-  font-size: 2rem;  /* Tamanho inicial dos ícones */
-  color: #00ff00;
-  opacity: 0.7;
-  cursor: pointer;
-  transition: opacity 0.3s ease, color 0.4s ease;
-  text-shadow: 0 0 6px #00ff00;
-  z-index: 9999; /* Garantir que fiquem acima de outros conteúdos */
-}
-
-/* Posicionamento do ícone no canto inferior direito */
-.ghost-key {
-  bottom: 20px;
-  right: 20px;
-}
-
-/* Posicionamento do ícone no canto inferior esquerdo */
-.roadmap-key {
-  bottom: 20px;
-  left: 20px;
-}
-
-/* Efeito de hover para os ícones */
-.ghost-key:hover, .roadmap-key:hover {
-  opacity: 1;
-  color: #00ff00;
-}
-
-/* Responsividade para tablets (telas até 768px) */
-@media (max-width: 768px) {
-  .ghost-key, .roadmap-key {
-    font-size: 1.8rem;
-    bottom: 15px;   /* Ajuste do espaço inferior */
-    left: 5%;       /* Ajuste da distância à esquerda */
-    right: 5%;      /* Ajuste da distância à direita */
-  }
-}
-
-/* Responsividade para celulares (telas até 600px) */
-@media (max-width: 600px) {
-  .ghost-key, .roadmap-key {
-    font-size: 1.5rem;
-    bottom: 15px;   /* Menos espaço no fundo */
-    left: 5%;       /* Ajuste da distância à esquerda */
-    right: 5%;      /* Ajuste da distância à direita */
-  }
-}
-
 /* Responsividade para celular */
 @media (max-width: 600px) {
+  .ghost-key, .roadmap-key {
+    font-size: 18px;
+    bottom: 15px;
+    left: 10%;  /* Ícone 🔐 (Rodapé) no lado esquerdo */
+    right: 10%; /* Ícone 🔗 (Telegram) no lado direito */
+  }
+
   .glitch-rodape {
     font-size: 12px;
     bottom: 5%;
   }
 
   .buttons-area {
-    top: 45%;
+    top: 45%;  /* Ajuste para a posição dos botões no celular */
   }
 
   .typing-area {
@@ -230,4 +185,31 @@ body {
     padding: 8px 12px;
     max-width: 100%;
   }
+}
+
+/* Ícones - Telegram e Rodapé */
+.ghost-key, .roadmap-key {
+  position: absolute; /* Fixação dos ícones sem sobreposição */
+  font-size: 22px;
+  color: #00ff00;
+  opacity: 0.5;
+  cursor: pointer;
+  transition: opacity 0.3s ease, color 0.4s ease;
+  text-shadow: 0 0 6px #00ff00;
+  z-index: 999;
+}
+
+.ghost-key {
+  bottom: 15px;  /* Ajuste para o ícone 🔗 à direita */
+  right: 15px;
+}
+
+.roadmap-key {
+  bottom: 15px;  /* Ajuste para o ícone 🔐 à esquerda */
+  left: 15px;
+}
+
+.ghost-key:hover, .roadmap-key:hover {
+  opacity: 1;
+  color: #00ff00;
 }
